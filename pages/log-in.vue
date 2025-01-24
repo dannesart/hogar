@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-10 flex flex-col justify-between h-screen bg-center bg-cover relative"
+    class="p-10 flex flex-col justify-between h-svh bg-center bg-cover relative"
   >
     <img src="~/assets/home.svg" />
 
