@@ -4,9 +4,9 @@
   >
     <img src="~/assets/home.svg" />
 
-    <div class="flex flex-col items-center justify-center">
-      <h1 class="text-4xl text-blue-950 font-extrabold">Welcome back!</h1>
-      <h2 class="text-4xl text-rose-400 font-extrabold">Sign in</h2>
+    <div class="flex flex-col gap-1">
+      <h1 class="text-6xl text-blue-950 font-extrabold">Welcome back!</h1>
+      <h2 class="text-6xl text-rose-300 font-extrabold">Sign in</h2>
     </div>
 
     <div class="grid gap-8 sticky bottom-10 z-10">
