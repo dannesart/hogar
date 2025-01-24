@@ -5,7 +5,7 @@
     <img src="~/assets/home.svg" />
 
     <div class="flex flex-col gap-1">
-      <h1 class="text-6xl text-blue-950 font-extrabold">Welcome back!</h1>
+      <h1 class="text-6xl text-blue-950 font-extrabold">Welcome!</h1>
       <h2 class="text-6xl text-rose-300 font-extrabold">Sign in</h2>
     </div>
 
