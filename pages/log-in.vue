@@ -2,11 +2,11 @@
   <div
     class="p-10 flex flex-col justify-between h-screen bg-[url(~/assets/splash.jpg)] bg-cover relative"
   >
-    <header class="sticky top-0">
+    <header>
       <div class="text-4xl text-white font-extrabold">Hogar</div>
     </header>
 
-    <div class="grid gap-8 sticky bottom-0 z-10">
+    <div class="grid gap-8 sticky bottom-10 z-10">
       <h2 class="text-2xl text-white font-extrabold">Log in</h2>
 
       <div class="flex flex-col gap-6 text-white justify-center">
