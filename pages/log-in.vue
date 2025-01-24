@@ -1,23 +1,22 @@
 <template>
   <div
-    class="p-10 flex flex-col justify-between h-screen bg-[url(~/assets/splash.jpg)] bg-cover relative"
+    class="p-10 flex flex-col justify-between h-screen bg-center bg-cover relative"
   >
-    <header>
-      <div class="text-4xl text-white font-extrabold">Hogar</div>
-    </header>
+    <img src="~/assets/home.svg" />
 
-    <div class="grid gap-8 sticky bottom-10 z-10">
-      <h2 class="text-2xl text-white font-extrabold">Log in</h2>
-
-      <div class="flex flex-col gap-6 text-white justify-center">
-        <AtomsButton @click="social('google')">Google</AtomsButton>
-        <AtomsButton @click="social('github')">Github</AtomsButton>
-      </div>
+    <div class="flex flex-col items-center justify-center">
+      <h1 class="text-4xl text-blue-950 font-extrabold">Welcome back!</h1>
+      <h2 class="text-4xl text-rose-400 font-extrabold">Sign in</h2>
     </div>
 
-    <div
-      class="bottom-0 absolute bg-gradient-to-t to-transparent from-black/40 h-96 left-0 right-0"
-    ></div>
+    <div class="grid gap-8 sticky bottom-10 z-10">
+      <div class="flex flex-col gap-6 text-white justify-center">
+        <AtomsButton @click="social('google')">Google</AtomsButton>
+        <AtomsButton :variant="'secondary'" @click="social('github')"
+          >Github</AtomsButton
+        >
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,4 +30,23 @@ const social = async (provider: Provider) => {
     options: { redirectTo: "/" },
   });
 };
+
+useHead({
+  title: "Log in",
+  meta: [
+    {
+      name: "apple-mobile-web-app-capable",
+      content: "yes",
+    },
+    {
+      name: "mobile-web-app-capable",
+      content: "yes",
+    },
+    {
+      name: "viewport",
+      content:
+        "minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+    },
+  ],
+});
 </script>
