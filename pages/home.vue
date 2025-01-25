@@ -1,7 +1,9 @@
 <template>
   <NuxtLayout>
-    <h1 class="text-6xl text-blue-950 font-extrabold">Your home</h1>
-  </NuxtLayout>
+<template v-slot:header>
+    <h1 class="text-3xl text-blue-950 font-extrabold">Your home</h1>
+  </template>
+</NuxtLayout>
 </template>
 <script setup lang="ts">
 definePageMeta({
