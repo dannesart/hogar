@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
     <div v-if="userObject" class="grid gap-8">
-      <h2 class="text-6xl text-blue-950 font-extrabold">
+      <h1 class="text-6xl text-blue-950 font-extrabold">
         Welcome,
         <span class="text-rose-300">
           {{
@@ -10,7 +10,7 @@
             userObject.user_metadata?.full_name?.split(" ")[0]
           }}.</span
         >
-      </h2>
+      </h1>
     </div>
   </NuxtLayout>
 </template>
