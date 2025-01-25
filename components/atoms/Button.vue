@@ -1,6 +1,6 @@
 <template>
   <button
-    class="font-bold text-lg px-6 py-4 rounded-xl"
+    class="font-bold text-xl px-6 py-4 rounded-xl flex gap-3 justify-center items-center"
     :class="variantClass()"
   >
     <slot />

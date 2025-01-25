@@ -11,9 +11,12 @@
 
     <div class="grid gap-8 sticky bottom-10 z-10">
       <div class="flex flex-col gap-6 text-white justify-center">
-        <AtomsButton @click="social('google')">Google</AtomsButton>
-        <AtomsButton :variant="'secondary'" @click="social('github')"
-          >Github</AtomsButton
+        <AtomsButton @click="social('google')">
+          <Icon name="meteor-icons:google" size="30" />
+          Google
+        </AtomsButton>
+        <AtomsButton :variant="'secondary'" @click="social('github')">
+          <Icon name="meteor-icons:github" size="30" /> Github</AtomsButton
         >
       </div>
     </div>
@@ -30,5 +33,4 @@ const social = async (provider: Provider) => {
     options: { redirectTo: "/" },
   });
 };
-
 </script>
