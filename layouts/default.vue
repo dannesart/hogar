@@ -4,6 +4,7 @@
       <NuxtLink :to="'/'">
         <Icon name="meteor-icons:home" size="40" />
       </NuxtLink>
+<slot name="header"></slot>
     </header>
     <main class="px-10 flex-1">
       <slot />
