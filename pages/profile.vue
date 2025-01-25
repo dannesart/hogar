@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
     <template v-slot:header>
-<h1 class="text-4xl text-blue-950 font-extrabold">Profile</h1>
+<h1 class="text-3xl text-blue-950 font-extrabold">Profile</h1>
 </template>
     <AtomsButton @click="handleLogout"> Log me out, please. </AtomsButton>
   </NuxtLayout>
