@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-svh">
-    <header class="p-10 flex justify-between items-center">
+    <header class="p-10 flex gap-4 items-center">
       <NuxtLink :to="'/'">
         <Icon name="meteor-icons:home" size="40" />
       </NuxtLink>
