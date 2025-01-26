@@ -52,6 +52,6 @@ const navs = [
   @apply hover:bg-rose-300 w-16 h-16 flex items-center justify-center rounded-full;
 }
 .active .icon {
-  @apply bg-rose-300;
+  @apply bg-rose-300 text-rose-950;
 }
 </style>

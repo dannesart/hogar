@@ -20,6 +20,12 @@
       {{ !required ? "(optional)" : "" }}
     </label>
     <Icon v-if="icon" :name="icon" size="30" class="absolute left-5 top-5" />
+    <div
+      v-if="disabled"
+      class="absolute -right-2 -top-2 w-8 h-8 flex items-center justify-center bg-blue-950 text-white rounded-full"
+    >
+      <Icon :name="'meteor-icons:lock'" size="15" />
+    </div>
   </div>
 </template>
 

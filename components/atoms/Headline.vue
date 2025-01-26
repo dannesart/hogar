@@ -6,6 +6,10 @@
   <h2 v-if="size === 2" class="text-4xl text-blue-950 font-extrabold mb-4">
     <slot />
   </h2>
+
+  <h3 v-if="size === 3" class="text-2xl text-blue-950 font-extrabold mb-4">
+    <slot />
+  </h3>
 </template>
 
 <script setup lang="ts">
