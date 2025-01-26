@@ -26,6 +26,16 @@
           :placeholder="'Loans'"
           :icon="'meteor-icons:dollar'"
         ></AtomsInput>
+        <AtomsCollapse label="Loans">
+          <AtomsList
+            :items="[{ label: 'Monthly', value: 3000, id: 32424 }]"
+            @delete="deleteItem"
+            @edit="editItem"
+          ></AtomsList>
+          <div class="flex justify-end">
+            <AtomsButton> Add loan </AtomsButton>
+          </div>
+        </AtomsCollapse>
       </article>
       <article class="grid gap-3">
         <AtomsHeadline :size="3"> Other </AtomsHeadline>
@@ -39,6 +49,14 @@
 const userClient = useSupabaseClient();
 const userObject = useSupabaseUser();
 const router = useRouter();
+
+const deleteItem = (id: number) => {
+  console.log("Delete", id);
+};
+
+const editItem = (id: number) => {
+  console.log("Edit", id);
+};
 
 const handleLogout = async () => {
   try {

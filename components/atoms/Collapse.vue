@@ -1,11 +1,11 @@
 <template>
   <article
-    class="rounded-3xl flex flex-col"
+    class="rounded-xl flex flex-col"
     :class="{ 'bg-rose-200': needsAttention, 'bg-gray-200': !needsAttention }"
   >
     <div
       @click="toggle"
-      class="px-10 py-5 text-2xl font-bold cursor-pointer flex justify-between"
+      class="px-5 py-5 text-2xl font-bold cursor-pointer flex justify-between"
     >
       <h2
         :class="{
@@ -21,7 +21,7 @@
         :class="{ 'rotate-180': isOpen }"
       />
     </div>
-    <section v-if="isOpen" class="px-10 py-5">
+    <section v-if="isOpen" class="px-5 py-5 grid gap-5">
       <slot />
     </section>
   </article>
