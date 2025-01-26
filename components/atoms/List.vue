@@ -2,24 +2,14 @@
   <div class="grid gap-4">
     <div
       v-for="item in items"
+@click="emits('edit', item.id)"
       class="bg-white p-5 rounded-xl text-xl flex gap-3 relative"
+:class="{ 'pl-16': !!item.icon }"
     >
+<div v-if="item.icon class="absolute w-12 h-12 rounded-full bg-gray-100 flex justify-center items-center left-5">
+<Icon :name="item.icon" size="15"/>
+</div>
       <span class="font-bold">{{ item.label }}</span> {{ item.value }}
-
-      <div class="absolute right-5 top-4 flex gap-4">
-        <button
-          @click="emits('delete', item.id)"
-          class="bg-gray-100 w-10 h-10 rounded-full flex justify-center items-center"
-        >
-          <Icon name="meteor-icons:trash-can" size="20" />
-        </button>
-        <button
-          @click="emits('edit', item.id)"
-          class="bg-gray-100 w-10 h-10 rounded-full flex justify-center items-center"
-        >
-          <Icon name="meteor-icons:pencil" size="20" />
-        </button>
-      </div>
     </div>
   </div>
 </template>
@@ -29,6 +19,7 @@ type Item = {
   label: string;
   value: string | number;
   id: number;
+icon?: string;
 };
 
 type Props = {
