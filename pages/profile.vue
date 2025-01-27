@@ -21,11 +21,6 @@
           :placeholder="'Salary'"
           :icon="'meteor-icons:dollar'"
         ></AtomsInput>
-        <AtomsInput
-          :type="'number'"
-          :placeholder="'Loans'"
-          :icon="'meteor-icons:dollar'"
-        ></AtomsInput>
         <AtomsCollapse label="Loans">
           <AtomsList
             :items="[{ label: 'Monthly', value: 3000, id: 32424 }]"
@@ -33,7 +28,7 @@
             @edit="editItem"
           ></AtomsList>
           <div class="flex justify-end">
-            <AtomsButton> Add loan </AtomsButton>
+            <AtomsButton :variant="'secondary'"> Add loan </AtomsButton>
           </div>
         </AtomsCollapse>
       </article>

@@ -1,6 +1,7 @@
 <template>
   <button
     class="font-bold text-xl px-6 py-4 rounded-xl flex gap-3 justify-center items-center"
+    v-wave
     :class="variantClass()"
   >
     <slot />
@@ -8,10 +9,12 @@
 </template>
 
 <script setup lang="ts">
-const { variant } = defineProps(["variant"]);
+type Props = {
+  variant?: "primary" | "secondary";
+};
+const { variant = "primary" } = defineProps<Props>();
 
 const variantClass = () => {
-  if (!variant) return "primary";
   return variant.toLowerCase();
 };
 </script>

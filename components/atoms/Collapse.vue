@@ -5,6 +5,7 @@
   >
     <div
       @click="toggle"
+      v-wave
       class="px-5 py-5 text-2xl font-bold cursor-pointer flex justify-between"
     >
       <h2
