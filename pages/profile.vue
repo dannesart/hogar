@@ -8,7 +8,7 @@
         <AtomsHeadline :size="3"> Base </AtomsHeadline>
         <AtomsInput
           :type="'email'"
-          :value="userObject?.user_metadata?.email"
+          :value="user?.email"
           :placeholder="'Email'"
           :icon="'meteor-icons:envelope'"
           :disabled="true"
@@ -41,9 +41,13 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
+import { useUserStore } from "~~/stores/user";
+
 const userClient = useSupabaseClient();
-const userObject = useSupabaseUser();
 const router = useRouter();
+
+const { user } = storeToRefs(useUserStore());
 
 const deleteItem = (id: number) => {
   console.log("Delete", id);

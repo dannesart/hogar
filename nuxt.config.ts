@@ -7,10 +7,37 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@nuxt/icon",
     "v-wave/nuxt",
+    "@nuxt/fonts",
+    "nuxt-mongoose",
+    [
+      "@pinia/nuxt",
+      {
+        autoImports: [
+          "defineStore",
+          "acceptHMRUpdate",
+          ["defineStore", "definePiniaStore"],
+        ],
+      },
+    ],
   ],
+  runtimeConfig: {
+    BASE_URL: process.env.BASE_URL,
+    public: {
+      BASE_URL: process.env.BASE_URL,
+    },
+  },
   tailwindcss: {
     exposeConfig: true,
     viewer: true,
+    config: {
+      theme: {
+        extend: {
+          fontFamily: {
+            MPLUS: ["M PLUS Rounded 1c"],
+          },
+        },
+      },
+    },
   },
   supabase: {
     url: process.env.SUPABASE_URL,

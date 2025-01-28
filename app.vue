@@ -2,6 +2,7 @@
   <NuxtPage />
 </template>
 <script setup>
+import { useUserStore } from "~/stores/user";
 useHead({
   title: "Hogar",
   meta: [
@@ -20,4 +21,7 @@ useHead({
     },
   ],
 });
+
+const { fetchUser } = useUserStore();
+await fetchUser();
 </script>
