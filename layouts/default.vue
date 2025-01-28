@@ -15,6 +15,7 @@
       <NuxtLink
         v-for="nav in navs"
         :to="nav.route"
+v-wave
         class="flex flex-col gap-2 justify-center items-center cursor-pointer"
         activeClass="text-rose-600"
       >
