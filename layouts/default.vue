@@ -15,12 +15,11 @@
       <NuxtLink
         v-for="nav in navs"
         :to="nav.route"
-        class="flex flex-col justify-center items-center"
-        activeClass="active"
+        class="flex flex-col gap-3 justify-center items-center cursor-pointer"
+        activeClass="text-rose-600"
       >
-        <div class="icon">
-          <Icon :name="nav.icon" size="30" />
-        </div>
+        <Icon :name="nav.icon" size="30" />
+
         <label>{{ nav.label }}</label>
       </NuxtLink>
     </nav>
@@ -28,30 +27,27 @@
 </template>
 
 <script setup lang="ts">
+const iconBase = "lucide:";
 const navs = [
   {
+    label: "Home",
+    icon: iconBase + "house",
+    route: "/",
+  },
+  {
     label: "Apps",
-    icon: "meteor-icons:app-gallery",
+    icon: iconBase + "grip",
     route: "/apps",
   },
   {
-    label: "Your home",
-    icon: "meteor-icons:home",
+    label: "Family",
+    icon: iconBase + "users-round",
     route: "/home",
   },
   {
     label: "Profile",
-    icon: "meteor-icons:user",
+    icon: iconBase + "user-round",
     route: "/profile",
   },
 ];
 </script>
-
-<style>
-.icon {
-  @apply hover:bg-rose-300 w-16 h-16 flex items-center justify-center rounded-full;
-}
-.active .icon {
-  @apply bg-rose-300 text-rose-950;
-}
-</style>

@@ -4,6 +4,14 @@
       <h1 class="text-3xl text-blue-950 font-extrabold">Profile</h1>
     </template>
     <section class="grid gap-10">
+      <div
+        class="bg-rose-50 p-4 md:p-10 rounded-2xl flex justify-center relative mb-10"
+      >
+        <img
+          :src="user?.user_metadata?.picture"
+          class="w-32 h-32 rounded-full object-cover relative top-20 md:top-24"
+        />
+      </div>
       <article class="grid gap-3">
         <AtomsHeadline :size="3"> Base </AtomsHeadline>
         <AtomsInput
@@ -13,24 +21,6 @@
           :icon="'meteor-icons:envelope'"
           :disabled="true"
         ></AtomsInput>
-      </article>
-      <article class="grid gap-3">
-        <AtomsHeadline :size="3"> Economy </AtomsHeadline>
-        <AtomsInput
-          :type="'number'"
-          :placeholder="'Salary'"
-          :icon="'meteor-icons:dollar'"
-        ></AtomsInput>
-        <AtomsCollapse label="Loans">
-          <AtomsList
-            :items="[{ label: 'Monthly', value: 3000, id: 32424 }]"
-            @delete="deleteItem"
-            @edit="editItem"
-          ></AtomsList>
-          <div class="flex justify-end">
-            <AtomsButton :variant="'secondary'"> Add loan </AtomsButton>
-          </div>
-        </AtomsCollapse>
       </article>
       <article class="grid gap-3">
         <AtomsHeadline :size="3"> Other </AtomsHeadline>

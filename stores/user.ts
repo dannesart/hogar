@@ -3,6 +3,9 @@ import axios from "axios";
 
 type User = {
   email: string;
+  user_metadata: {
+    picture: string;
+  };
 };
 
 type State = {
