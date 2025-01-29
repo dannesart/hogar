@@ -7,10 +7,12 @@
       <div
         class="bg-rose-50 p-4 md:p-10 rounded-2xl flex justify-center relative mb-10"
       >
-        <img
-          :src="user?.user_metadata?.picture"
-          class="w-32 h-32 rounded-full object-cover relative top-20 md:top-24"
-        />
+        <ClientOnly>
+          <img
+            :src="user?.user_metadata?.picture"
+            class="w-32 h-32 rounded-full object-cover relative top-20 md:top-24"
+          />
+        </ClientOnly>
       </div>
       <article class="grid gap-3">
         <AtomsHeadline :size="3"> Base </AtomsHeadline>

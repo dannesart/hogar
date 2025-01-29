@@ -42,7 +42,7 @@ const navs = [
   {
     label: "Family",
     icon: iconBase + "users-round",
-    route: "/home",
+    route: "/family",
   },
   {
     label: "Profile",
