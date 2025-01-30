@@ -1,15 +1,20 @@
 <template>
-  <div
-    class="p-10 flex flex-col justify-between h-svh bg-center bg-cover relative"
-  >
-    <img src="~/assets/home.svg" />
+  <div class="p-10 flex flex-col justify-between h-svh bg-rose-50 relative">
+    <!-- <img src="~/assets/home.svg" /> -->
+    <div class="text-2xl text-blue-950 font-extrabold flex gap-4 items-center">
+      <Icon name="meteor-icons:home" size="40" /> Hogar
+    </div>
 
-    <div class="flex flex-col gap-1">
-      <h1 class="text-6xl text-blue-950 font-extrabold">Welcome!</h1>
+    <div
+      class="flex flex-col gap-1 md:self-center md:w-full md:max-w-screen-sm"
+    >
+      <h1 class="text-7xl text-blue-950 font-extrabold">Welcome!</h1>
       <h2 class="text-6xl text-rose-300 font-extrabold">Sign in</h2>
     </div>
 
-    <div class="grid gap-8 sticky bottom-10 z-10">
+    <div
+      class="grid gap-8 sticky bottom-10 md:self-center z-10 md:w-full md:max-w-screen-sm"
+    >
       <div class="flex flex-col gap-6 text-white justify-center">
         <AtomsButton @click="social('google')">
           <Icon name="meteor-icons:google" size="30" />
