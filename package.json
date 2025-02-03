@@ -21,6 +21,7 @@
     "pinia": "^2.3.1",
     "v-wave": "^3.0.2",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "zod": "^3.24.1"
   }
 }

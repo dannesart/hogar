@@ -3,6 +3,7 @@
 </template>
 <script setup>
 import { useUserStore } from "~/stores/user";
+import { useFamilyStore } from "~/stores/family";
 useHead({
   title: "Hogar",
   meta: [
@@ -23,5 +24,6 @@ useHead({
 });
 
 const { fetchUser } = useUserStore();
-await fetchUser();
+const { fetchFamilies } = useFamilyStore();
+await Promise.all([fetchUser(), fetchFamilies()]);
 </script>

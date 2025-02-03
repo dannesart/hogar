@@ -2,34 +2,51 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 type Family = {
-  name: string;
+  title: string;
   members: string[];
 };
 
 type State = {
-  family: Family;
+  _families: Family[];
 };
 
 export const useFamilyStore = defineStore("FamilyStore", {
   state: () =>
     <State>{
-      family: {},
+      _families: [],
     },
   getters: {
-    currentFamily: (state) => state.family,
+    families: (state) => state._families,
   },
   actions: {
-    setUser(family: Family) {
-      this.family = family;
+    setFamilies(families: Family[]) {
+      this._families = families;
     },
-    async fetchFamily() {
+    setFamily(family: Family) {
+      this._families.push(family);
+    },
+    async newFamily(title: string) {
+      try {
+        const config = useRuntimeConfig();
+        const response = await axios.post(
+          config.public.BASE_URL + "/api/family",
+          {
+            title,
+          }
+        );
+        if (response.data) {
+          this.setFamily(response.data);
+        }
+      } catch (error) {}
+    },
+    async fetchFamilies() {
       try {
         const config = useRuntimeConfig();
         const response = await axios.get(
           config.public.BASE_URL + "/api/family"
         );
         if (response.data) {
-          this.setUser(response.data);
+          this.setFamilies(response.data);
         }
       } catch (error) {}
     },

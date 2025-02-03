@@ -4,7 +4,7 @@
     @click="emits('close')"
   ></div>
   <div
-    class="bg-white z-20 p-5 bottom-0 left-0 right-0 rounded-xl fixed flex flex-col gap-5 slide-in"
+    class="bg-white z-20 p-5 bottom-0 left-0 right-0 md:left-1/4 md:right-1/4 rounded-xl fixed flex flex-col gap-5 slide-in"
   >
     <header>
       <slot name="header" />

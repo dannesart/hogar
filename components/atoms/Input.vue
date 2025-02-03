@@ -8,6 +8,7 @@
       :max="max"
       :disabled="disabled"
       :value="value"
+      @input="updateValue($event)"
       class="p-5 rounded-xl text-2xl w-full"
       :class="{
         'bg-rose-100': notValid,
@@ -50,4 +51,10 @@ const {
 } = defineProps<Props>();
 
 const notValid = ref(false);
+
+const emits = defineEmits(["update"]);
+const updateValue = (event: Event) => {
+  const newValue = (event.target as { value?: string }).value;
+  emits("update", newValue);
+};
 </script>
