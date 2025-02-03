@@ -1,9 +1,6 @@
 <template>
   <div class="flex flex-col h-svh">
     <header class="py-5 px-5 md:px-10 flex gap-4 items-center">
-      <NuxtLink :to="'/'">
-        <Icon name="meteor-icons:home" size="40" />
-      </NuxtLink>
       <slot name="header"></slot>
     </header>
     <main class="px-5 md:px-10 flex-1 max-w-screen-xl w-full self-center">
@@ -15,7 +12,7 @@
       <NuxtLink
         v-for="nav in navs"
         :to="nav.route"
-        class="flex flex-col gap-2 justify-center items-center cursor-pointer"
+        class="flex flex-col gap-1 justify-center items-center cursor-pointer"
         activeClass="text-rose-400"
       >
         <Icon :name="nav.icon" size="30" />

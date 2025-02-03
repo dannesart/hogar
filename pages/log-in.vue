@@ -1,14 +1,14 @@
 <template>
-  <div class="p-10 flex flex-col justify-between h-svh bg-rose-50 relative">
+  <div class="p-10 flex flex-col justify-between h-svh sb relative">
     <!-- <img src="~/assets/home.svg" /> -->
     <div class="text-2xl text-blue-950 font-extrabold flex gap-4 items-center">
-      <Icon name="meteor-icons:home" size="40" /> Hogar
+      Hogar
     </div>
 
     <div
       class="flex flex-col gap-1 md:self-center md:w-full md:max-w-screen-sm"
     >
-      <h1 class="text-7xl text-blue-950 font-extrabold">Welcome!</h1>
+      <h1 class="text-6xl text-blue-950 font-extrabold">Welcome!</h1>
       <h2 class="text-6xl text-rose-300 font-extrabold">Sign in</h2>
     </div>
 
@@ -39,3 +39,11 @@ const social = async (provider: Provider) => {
   });
 };
 </script>
+
+<style>
+.sb {
+  background: linear-gradient(150deg, #ecedee, transparent 30%),
+    linear-gradient(330deg, rgb(210, 206, 242), transparent 30%),
+    linear-gradient(225deg, #fff0be, #fbdce7, #e2fae1, powderblue);
+}
+</style>
