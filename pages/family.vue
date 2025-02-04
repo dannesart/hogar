@@ -53,6 +53,7 @@ const { families } = storeToRefs(familyStore);
 
 const isShowingCreateFamilyModal = ref(false);
 const familyName = ref();
+
 const toggleCreateFamiliy = () => {
   isShowingCreateFamilyModal.value = !isShowingCreateFamilyModal.value;
 };

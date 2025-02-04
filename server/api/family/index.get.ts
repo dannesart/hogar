@@ -10,7 +10,7 @@ export default defineEventHandler(async (e) => {
   });
 
   return (
-    families.map((family) => {
+    [...families].map((family) => {
       return {
         ...family.toJSON(),
         id: family._id,
