@@ -3,11 +3,11 @@
     <slot />
   </h1>
 
-  <h2 v-if="size === 2" class="text-4xl text-blue-950 font-extrabold mb-4">
+  <h2 v-if="size === 2" class="text-4xl text-blue-950 font-extrabold">
     <slot />
   </h2>
 
-  <h3 v-if="size === 3" class="text-2xl text-blue-950 font-extrabold mb-4">
+  <h3 v-if="size === 3" class="text-2xl text-blue-950 font-extrabold">
     <slot />
   </h3>
 </template>

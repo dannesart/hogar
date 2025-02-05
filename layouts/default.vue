@@ -3,7 +3,9 @@
     <header class="py-5 px-5 md:px-10 flex gap-4 items-center">
       <slot name="header"></slot>
     </header>
-    <main class="px-5 md:px-10 flex-1 max-w-screen-xl w-full self-center">
+    <main
+      class="px-5 md:px-10 flex-1 max-w-screen-xl w-full self-center relative"
+    >
       <slot />
     </main>
     <nav

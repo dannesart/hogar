@@ -4,17 +4,21 @@
       <h1 class="text-3xl text-blue-950 font-extrabold">Family</h1>
     </template>
     <section>
-      <div class="p-5 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10">
-        <AtomsHeadline :size="3" v-if="!families.length">
-          It looks so empty in here :(
-        </AtomsHeadline>
+      <div
+        class="p-5 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10"
+        v-if="!families.length"
+      >
+        <AtomsHeadline :size="3"> It looks so empty in here :( </AtomsHeadline>
         <AtomsButton @click="toggleCreateFamiliy">Create family</AtomsButton>
       </div>
 
       <div class="flex flex-col gap-5">
-        <AtomsCollapse v-for="family in families" :label="family.title">
-          <label>Members:</label> {{ family.members.length }}
-        </AtomsCollapse>
+        <MoleculesCard
+          v-for="family in families"
+          :title="family.title"
+          :icon="'lucide:users-round'"
+          :short="'Members: ' + family.members.length"
+        ></MoleculesCard>
       </div>
 
       <AtomsModal
@@ -37,6 +41,12 @@
           <AtomsButton @click="createFamily"> Create family </AtomsButton>
         </template>
       </AtomsModal>
+
+      <MoleculesAction
+        v-if="families.length"
+        @click="toggleCreateFamiliy"
+        class="absolute bottom-6 right-6"
+      ></MoleculesAction>
     </section>
   </NuxtLayout>
 </template>
