@@ -5,9 +5,9 @@ import { serverSupabaseUser } from "#supabase/server";
 export default defineEventHandler(async (e) => {
   await protectRoute(e);
   const user = await serverSupabaseUser(e);
-  //   const families = await FamilyModel.find({
-  //     createdBy: user?.id,
-  //   });
+  const families = await FamilyModel.find({
+    createdBy: user?.id,
+  });
 
   return user;
   //   return (
