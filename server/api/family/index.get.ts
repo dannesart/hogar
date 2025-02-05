@@ -9,13 +9,12 @@ export default defineEventHandler(async (e) => {
     createdBy: user?.id,
   });
 
-  return user;
-  //   return (
-  //     [...families].map((family) => {
-  //       return {
-  //         ...family.toJSON(),
-  //         id: family._id,
-  //       };
-  //     }) || []
-  //   );
+  return (
+    [...families].map((family) => {
+      return {
+        ...family.toJSON(),
+        id: family._id,
+      };
+    }) || []
+  );
 });
