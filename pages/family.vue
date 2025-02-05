@@ -17,8 +17,9 @@
           v-for="family in families"
           :title="family.title"
           :icon="'lucide:users-round'"
-          :short="'Members: ' + family.members.length"
-        ></MoleculesCard>
+        >
+          <strong>Members:</strong> {{ family.members.length }}
+        </MoleculesCard>
       </div>
 
       <AtomsModal
