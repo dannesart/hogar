@@ -22,7 +22,7 @@
       <div class="flex flex-col gap-5">
         <MoleculesCard
           v-for="family in families"
-          :title="family.title + ' (' + family.members.length + ')'"
+          :title="family.title"
           :icon="'lucide:users-round'"
           :editable="family.createdBy === user.id"
           @action="($event) => handleAction($event, family.id)"

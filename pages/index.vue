@@ -4,7 +4,7 @@
       <AtomsHeadline :size="3">Hogar</AtomsHeadline>
     </template>
     <div v-if="userObject" class="grid gap-8">
-      <h1 class="text-6xl text-blue-950 font-extrabold font-patua">
+      <h1 class="text-6xl text-blue-950 font-extrabold font-figtree">
         Welcome,
         <span class="text-rose-300">
           {{

@@ -15,7 +15,7 @@
         </ClientOnly>
       </div>
       <article class="grid gap-3">
-        <AtomsHeadline :size="3"> Base </AtomsHeadline>
+        <AtomsHeadline :size="4"> Base </AtomsHeadline>
         <AtomsInput
           :type="'email'"
           :value="user?.email"
@@ -25,7 +25,7 @@
         ></AtomsInput>
       </article>
       <article class="grid gap-3">
-        <AtomsHeadline :size="3"> Other </AtomsHeadline>
+        <AtomsHeadline :size="4"> Other </AtomsHeadline>
         <AtomsButton @click="handleLogout"> Log me out, please. </AtomsButton>
       </article>
     </section>

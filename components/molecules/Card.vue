@@ -7,11 +7,11 @@
       <div class="flex gap-8 items-center">
         <div
           v-if="icon"
-          class="w-16 h-16 rounded-full bg-rose-50 flex justify-center items-center"
+          class="w-16 h-16 flex-none rounded-full bg-rose-50 flex justify-center items-center"
         >
           <Icon :name="icon" :size="30" />
         </div>
-        <AtomsHeadline :size="3" v-if="title">
+        <AtomsHeadline :size="4" v-if="title">
           {{ title }}
         </AtomsHeadline>
       </div>
@@ -27,9 +27,8 @@
         v-if="editable"
       ></MoleculesAction>
     </header>
-    <div class="mt-5 pl-24">
-      <slot />
-    </div>
+
+    <slot />
   </article>
 </template>
 
