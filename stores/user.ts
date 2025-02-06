@@ -3,6 +3,7 @@ import axios from "axios";
 
 type User = {
   email: string;
+  id: string;
   user_metadata: {
     picture: string;
   };

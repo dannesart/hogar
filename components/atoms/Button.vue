@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 type Props = {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "transparent";
 };
 const { variant = "primary" } = defineProps<Props>();
 
@@ -25,5 +25,8 @@ const variantClass = () => {
 }
 .secondary {
   @apply bg-blue-950 hover:bg-blue-800 text-white;
+}
+.transparent {
+  @apply border border-solid border-blue-950 text-blue-950;
 }
 </style>

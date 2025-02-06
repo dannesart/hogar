@@ -17,6 +17,8 @@
           v-for="family in families"
           :title="family.title"
           :icon="'lucide:users-round'"
+          :editable="family.createdBy === user.id"
+          @action="handleAction"
         >
           <strong>Members:</strong> {{ family.members.length }}
         </MoleculesCard>
@@ -46,24 +48,36 @@
       <MoleculesAction
         v-if="families.length"
         @click="toggleCreateFamiliy"
+        :variant="'add'"
         class="absolute bottom-6 right-6"
       ></MoleculesAction>
+
+      <MoleculesConfirm
+        :show="showConfirm"
+        :title="'Delete family'"
+        @confirm="confirmDeleteFamily"
+        @close="toggleConfirmDeleteFamily"
+      ></MoleculesConfirm>
     </section>
   </NuxtLayout>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useFamilyStore } from "~~/stores/family";
+import { useUserStore } from "~~/stores/user";
 
 definePageMeta({
   middleware: "auth",
 });
 const familyStore = useFamilyStore();
-const { newFamily } = familyStore;
+const { newFamily, deleteFamily } = familyStore;
 const { families } = storeToRefs(familyStore);
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 
 const isShowingCreateFamilyModal = ref(false);
 const familyName = ref();
+const showConfirm = ref(false);
 
 const toggleCreateFamiliy = () => {
   isShowingCreateFamilyModal.value = !isShowingCreateFamilyModal.value;
@@ -76,5 +90,19 @@ const updateName = (e: any) => {
 const createFamily = async () => {
   if (familyName.value) await newFamily(familyName.value);
   toggleCreateFamiliy();
+};
+
+const confirmDeleteFamily = async () => {
+  debugger;
+  await familyName.value;
+  toggleConfirmDeleteFamily();
+};
+
+const toggleConfirmDeleteFamily = async () => {
+  showConfirm.value = !showConfirm.value;
+};
+
+const handleAction = async (actionId: string) => {
+  if (actionId === "delete") toggleConfirmDeleteFamily();
 };
 </script>

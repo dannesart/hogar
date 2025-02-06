@@ -10,7 +10,7 @@
       <slot name="header" />
     </header>
     <slot />
-    <footer class="flex justify-end">
+    <footer class="flex justify-end gap-4">
       <slot name="footer" />
     </footer>
   </div>

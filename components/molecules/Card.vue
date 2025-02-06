@@ -15,14 +15,13 @@
           {{ title }}
         </AtomsHeadline>
       </div>
-      <div
+      <MoleculesAction
+        :variant="'more'"
+        :style="'transparent'"
+        @action="handleAction"
+        :actions="[{ label: 'Delete', actionId: 'delete' }]"
         v-if="editable"
-        v-wave
-        class="cursor-pointer w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-100"
-        @click="emits('edit')"
-      >
-        <Icon name="lucide:ellipsis-vertical" :size="30" />
-      </div>
+      ></MoleculesAction>
     </header>
     <div class="mt-5 pl-24">
       <slot />
@@ -36,7 +35,11 @@ type Props = {
   icon?: string;
   editable?: boolean;
 };
-const { title, icon, editable = true } = defineProps<Props>();
+const { title, icon, editable = false } = defineProps<Props>();
 
-const emits = defineEmits(["edit"]);
+const emits = defineEmits(["edit", "action"]);
+
+const handleAction = async (actionId: string) => {
+  emits("action", actionId);
+};
 </script>

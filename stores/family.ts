@@ -4,6 +4,7 @@ import axios from "axios";
 type Family = {
   title: string;
   members: string[];
+  createdBy: string;
 };
 
 type State = {
@@ -36,6 +37,17 @@ export const useFamilyStore = defineStore("FamilyStore", {
         );
         if (response.data) {
           this.setFamily(response.data);
+        }
+      } catch (error) {}
+    },
+    async deleteFamily(id: string) {
+      try {
+        const config = useRuntimeConfig();
+        const response = await axios.delete(
+          config.public.BASE_URL + "/api/family/" + id
+        );
+        if (response.data) {
+          // Remove from list
         }
       } catch (error) {}
     },
