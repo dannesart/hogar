@@ -15,6 +15,7 @@
       <AtomsButton
         v-for="action in actions"
         @click="handleMoreAction(action.actionId)"
+        :variant="action.variant"
       >
         {{ action.label }}
       </AtomsButton>
@@ -26,7 +27,11 @@
 type Props = {
   variant?: "add" | "more" | "delete";
   style?: "default" | "transparent";
-  actions?: { label: string; actionId: string }[];
+  actions?: {
+    label: string;
+    actionId: string;
+    variant?: "primary" | "secondary" | "transparent";
+  }[];
   size?: "default" | "small";
   float?: boolean;
 };

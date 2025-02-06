@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
+  css: ["~~/assets/main.css"],
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxtjs/supabase",
@@ -26,6 +27,11 @@ export default defineNuxtConfig({
       BASE_URL: process.env.BASE_URL,
     },
   },
+  fonts: {
+    experimental: {
+      processCSSVariables: true,
+    },
+  },
   tailwindcss: {
     exposeConfig: true,
     viewer: true,
@@ -34,6 +40,7 @@ export default defineNuxtConfig({
         extend: {
           fontFamily: {
             MPLUS: ["M PLUS Rounded 1c"],
+            patua: ["Patua One"],
           },
         },
       },

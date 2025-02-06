@@ -21,7 +21,7 @@
         :size="'small'"
         @action="handleAction"
         :actions="[
-          { label: 'Delete', actionId: 'delete' },
+          { label: 'Delete', actionId: 'delete', variant: 'transparent' },
           { label: 'Invite', actionId: 'invite' },
         ]"
         v-if="editable"
