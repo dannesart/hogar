@@ -8,6 +8,7 @@
       :max="max"
       :disabled="disabled"
       :value="value"
+      :autofocus="autofocus"
       @input="updateValue($event)"
       class="p-5 rounded-xl text-2xl w-full"
       :class="{
@@ -41,6 +42,7 @@ type Props = {
   label?: string;
   icon?: string;
   value?: string | number;
+  autofocus?: boolean;
 };
 const {
   type = "text",
@@ -48,6 +50,7 @@ const {
   placeholder = "",
   label = "",
   disabled = false,
+  autofocus = false,
 } = defineProps<Props>();
 
 const notValid = ref(false);

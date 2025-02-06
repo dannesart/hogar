@@ -3,12 +3,13 @@
     <template v-slot:header v-if="title">
       <AtomsHeadline :size="2"> {{ title }} </AtomsHeadline>
     </template>
-    <template v-slot:footer>
+
+    <div class="flex flex-col gap-5">
       <AtomsButton @click="emits('close')" :variant="'transparent'">
         Cancel
       </AtomsButton>
       <AtomsButton @click="emits('confirm')"> Confirm </AtomsButton>
-    </template>
+    </div>
   </AtomsModal>
 </template>
 <script setup lang="ts">

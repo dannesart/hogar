@@ -41,6 +41,7 @@
             :type="'text'"
             :placeholder="'Name'"
             :icon="'lucide:letter-text'"
+            :autofocus="true"
             :value="familyName"
             @update="updateName"
           />

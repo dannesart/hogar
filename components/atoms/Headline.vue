@@ -8,20 +8,20 @@
 
   <h2
     v-if="size === 2"
-    class="text-4xl text-blue-950 font-extrabold font-MPLUS"
+    class="text-4xl text-blue-950 font-extrabold font-figtree"
   >
     <slot />
   </h2>
 
   <h3
     v-if="size === 3"
-    class="text-3xl text-blue-950 font-extrabold font-MPLUS"
+    class="text-3xl text-blue-950 font-extrabold font-figtree"
   >
     <slot />
   </h3>
   <h3
     v-if="size === 4"
-    class="text-2xl text-blue-950 font-extrabold font-MPLUS"
+    class="text-2xl text-blue-950 font-extrabold font-figtree"
   >
     <slot />
   </h3>
