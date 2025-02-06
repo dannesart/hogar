@@ -49,7 +49,7 @@
         v-if="families.length"
         @action="toggleCreateFamiliy"
         :variant="'add'"
-        class="absolute bottom-6 right-6 z-10"
+        :float="true"
       ></MoleculesAction>
 
       <MoleculesConfirm

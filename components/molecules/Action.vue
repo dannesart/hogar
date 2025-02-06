@@ -28,12 +28,14 @@ type Props = {
   style?: "default" | "transparent";
   actions?: { label: string; actionId: string }[];
   size?: "default" | "small";
+  float?: boolean;
 };
 
 const {
   variant = "more",
   style = "default",
   size = "default",
+  float = false,
 } = defineProps<Props>();
 const emits = defineEmits(["action"]);
 const showModal = ref(false);
@@ -61,6 +63,8 @@ const icon = computed(() => {
 
 const cssStyle = computed(() => {
   const combined = [];
+
+  if (float) combined.push("absolute bottom-6 right-6 z-10 shadow-xl");
 
   switch (style) {
     case "transparent":
