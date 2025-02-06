@@ -15,6 +15,12 @@
 
   <h3
     v-if="size === 3"
+    class="text-3xl text-blue-950 font-extrabold font-MPLUS"
+  >
+    <slot />
+  </h3>
+  <h3
+    v-if="size === 4"
     class="text-2xl text-blue-950 font-extrabold font-MPLUS"
   >
     <slot />

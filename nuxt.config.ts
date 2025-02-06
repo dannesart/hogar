@@ -41,6 +41,7 @@ export default defineNuxtConfig({
           fontFamily: {
             MPLUS: ["M PLUS Rounded 1c"],
             patua: ["Patua One"],
+            figtree: ["Figtree"],
           },
         },
       },

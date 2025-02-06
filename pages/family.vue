@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
     <template v-slot:header>
-      <h1 class="text-3xl text-blue-950 font-extrabold">Family</h1>
+      <AtomsHeadline :size="3">Family</AtomsHeadline>
     </template>
     <section>
       <div

@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
     <template v-slot:header>
-      <h1 class="text-3xl text-blue-950 font-extrabold">Profile</h1>
+      <AtomsHeadline :size="3">Profile</AtomsHeadline>
     </template>
     <section class="grid gap-10">
       <div
@@ -40,14 +40,6 @@ const userClient = useSupabaseClient();
 const router = useRouter();
 
 const { user } = storeToRefs(useUserStore());
-
-const deleteItem = (id: number) => {
-  console.log("Delete", id);
-};
-
-const editItem = (id: number) => {
-  console.log("Edit", id);
-};
 
 const handleLogout = async () => {
   try {

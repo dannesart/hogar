@@ -1,12 +1,9 @@
 <template>
   <div class="p-10 flex flex-col justify-between h-svh sb relative">
-    <!-- <img src="~/assets/home.svg" /> -->
-    <div class="text-2xl text-blue-950 font-extrabold flex gap-4 items-center">
-      Hogar
-    </div>
+    <AtomsHeadline :size="3"> Hogar </AtomsHeadline>
 
     <div
-      class="flex flex-col gap-1 md:self-center md:w-full md:max-w-screen-sm"
+      class="flex flex-col gap-1 md:self-center md:w-full md:max-w-screen-sm font-patua"
     >
       <h1 class="text-6xl text-blue-950 font-extrabold">Welcome!</h1>
       <h2 class="text-6xl text-rose-300 font-extrabold">Sign in</h2>

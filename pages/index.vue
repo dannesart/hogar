@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
     <template v-slot:header>
-      <h1 class="text-3xl text-blue-950 font-extrabold">Hogar</h1>
+      <AtomsHeadline :size="3">Hogar</AtomsHeadline>
     </template>
     <div v-if="userObject" class="grid gap-8">
       <h1 class="text-6xl text-blue-950 font-extrabold font-patua">
