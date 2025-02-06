@@ -22,13 +22,11 @@
       <div class="flex flex-col gap-5">
         <MoleculesCard
           v-for="family in families"
-          :title="family.title"
+          :title="family.title + ' (' + family.members.length + ')'"
           :icon="'lucide:users-round'"
           :editable="family.createdBy === user.id"
           @action="($event) => handleAction($event, family.id)"
-        >
-          <strong>Members:</strong> {{ family.members.length }}
-        </MoleculesCard>
+        ></MoleculesCard>
       </div>
 
       <AtomsModal
@@ -71,7 +69,7 @@
       </AtomsModal>
 
       <MoleculesAction
-        v-if="families.length"
+        v-if="families.length && families.length <= maxFamilies"
         @action="toggleCreateFamiliy"
         :variant="'add'"
         :float="true"
@@ -100,6 +98,7 @@ const { families, loading } = storeToRefs(familyStore);
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 
+const maxFamilies = 3;
 const isShowingCreateFamilyModal = ref(false);
 const familyName = ref();
 const inviteEmail = ref();
