@@ -5,6 +5,7 @@ type Family = {
   title: string;
   members: string[];
   createdBy: string;
+  id: string;
 };
 
 type State = {
@@ -25,6 +26,10 @@ export const useFamilyStore = defineStore("FamilyStore", {
     },
     setFamily(family: Family) {
       this._families.push(family);
+    },
+    removeFamily(id: string) {
+      const idx = this._families.findIndex((family) => family.id === id);
+      this._families.splice(idx, 1);
     },
     async newFamily(title: string) {
       try {
@@ -47,7 +52,7 @@ export const useFamilyStore = defineStore("FamilyStore", {
           config.public.BASE_URL + "/api/family/" + id
         );
         if (response.data) {
-          // Remove from list
+          this.removeFamily(id);
         }
       } catch (error) {}
     },

@@ -18,7 +18,7 @@
           :title="family.title"
           :icon="'lucide:users-round'"
           :editable="family.createdBy === user.id"
-          @action="handleAction"
+          @action="($event) => handleAction($event, family.id)"
         >
           <strong>Members:</strong> {{ family.members.length }}
         </MoleculesCard>
@@ -47,16 +47,16 @@
 
       <MoleculesAction
         v-if="families.length"
-        @click="toggleCreateFamiliy"
+        @action="toggleCreateFamiliy"
         :variant="'add'"
-        class="absolute bottom-6 right-6"
+        class="absolute bottom-6 right-6 z-10"
       ></MoleculesAction>
 
       <MoleculesConfirm
         :show="showConfirm"
         :title="'Delete family'"
         @confirm="confirmDeleteFamily"
-        @close="toggleConfirmDeleteFamily"
+        @close="toggleConfirmDeleteFamily('')"
       ></MoleculesConfirm>
     </section>
   </NuxtLayout>
@@ -78,6 +78,7 @@ const { user } = storeToRefs(userStore);
 const isShowingCreateFamilyModal = ref(false);
 const familyName = ref();
 const showConfirm = ref(false);
+const activeFamilyId = ref();
 
 const toggleCreateFamiliy = () => {
   isShowingCreateFamilyModal.value = !isShowingCreateFamilyModal.value;
@@ -93,16 +94,17 @@ const createFamily = async () => {
 };
 
 const confirmDeleteFamily = async () => {
-  debugger;
   await familyName.value;
-  toggleConfirmDeleteFamily();
+  await deleteFamily(activeFamilyId.value);
+  toggleConfirmDeleteFamily("");
 };
 
-const toggleConfirmDeleteFamily = async () => {
+const toggleConfirmDeleteFamily = async (familyId: string) => {
   showConfirm.value = !showConfirm.value;
+  activeFamilyId.value = familyId;
 };
 
-const handleAction = async (actionId: string) => {
-  if (actionId === "delete") toggleConfirmDeleteFamily();
+const handleAction = async (actionId: string, familyId: string) => {
+  if (actionId === "delete") toggleConfirmDeleteFamily(familyId);
 };
 </script>

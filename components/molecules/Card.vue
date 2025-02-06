@@ -18,6 +18,7 @@
       <MoleculesAction
         :variant="'more'"
         :style="'transparent'"
+        :size="'small'"
         @action="handleAction"
         :actions="[{ label: 'Delete', actionId: 'delete' }]"
         v-if="editable"

@@ -1,7 +1,7 @@
 <template>
   <button
     v-wave
-    class="w-20 h-20 rounded-full flex justify-center items-center cursor-pointer"
+    class="rounded-full flex justify-center items-center cursor-pointer"
     :class="cssStyle"
     @click="toggleModal"
   >
@@ -27,14 +27,20 @@ type Props = {
   variant?: "add" | "more" | "delete";
   style?: "default" | "transparent";
   actions?: { label: string; actionId: string }[];
+  size?: "default" | "small";
 };
 
-const { variant = "more", style = "default" } = defineProps<Props>();
+const {
+  variant = "more",
+  style = "default",
+  size = "default",
+} = defineProps<Props>();
 const emits = defineEmits(["action"]);
 const showModal = ref(false);
 
 const toggleModal = () => {
   showModal.value = !showModal.value;
+  emits("action", "toggle");
 };
 
 const handleMoreAction = (actionId: string) => {
@@ -54,11 +60,24 @@ const icon = computed(() => {
 });
 
 const cssStyle = computed(() => {
+  const combined = [];
+
   switch (style) {
     case "transparent":
-      return "hover:bg-gray-100 bg-transparent";
+      combined.push("hover:bg-gray-100 bg-transparent");
+      break;
     default:
-      return "bg-rose-50 text-rose-500";
+      combined.push("bg-rose-50 text-rose-500");
+      break;
   }
+  switch (size) {
+    case "small":
+      combined.push("w-16 h-16");
+      break;
+    default:
+      combined.push("w-20 h-20");
+      break;
+  }
+  return combined.join(" ");
 });
 </script>
