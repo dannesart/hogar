@@ -8,9 +8,15 @@ type Family = {
   id: string;
 };
 
+type Invite = {
+  sender: string;
+  id: string;
+};
+
 type State = {
   _families: Family[];
   _loading: boolean;
+  _invites: Invite[];
 };
 
 export const useFamilyStore = defineStore("FamilyStore", {
@@ -18,10 +24,12 @@ export const useFamilyStore = defineStore("FamilyStore", {
     <State>{
       _families: [],
       _loading: true,
+      _invites: [],
     },
   getters: {
     families: (state) => state._families,
     loading: (state) => state._loading,
+    invites: (state) => state._invites,
   },
   actions: {
     setLoading(loading: boolean) {
@@ -32,6 +40,9 @@ export const useFamilyStore = defineStore("FamilyStore", {
     },
     setFamily(family: Family) {
       this._families.push(family);
+    },
+    setInvites(invites: Invite[]) {
+      this._invites = invites;
     },
     removeFamily(id: string) {
       const idx = this._families.findIndex((family) => family.id === id);
@@ -76,6 +87,21 @@ export const useFamilyStore = defineStore("FamilyStore", {
         this.setLoading(false);
       }
     },
-    async inviteToFamily(familyId: string, email: string) {},
+    async inviteToFamily(familyId: string, email: string) {
+      try {
+        const config = useRuntimeConfig();
+        const response = await axios.post(
+          config.public.BASE_URL + "/api/invite",
+          {
+            id: familyId,
+            email,
+          }
+        );
+        if (response.data) {
+        }
+      } catch (error) {
+        this.setLoading(false);
+      }
+    },
   },
 });

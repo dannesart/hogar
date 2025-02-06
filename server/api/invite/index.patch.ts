@@ -1,9 +1,11 @@
 import { FamilyModel } from "~~/models/family.db";
 import protectRoute from "~/server/protectedRoute";
+import { serverSupabaseUser } from "#supabase/server";
 import { z } from "zod";
 
 export default defineEventHandler(async (e) => {
   await protectRoute(e);
+  const user = await serverSupabaseUser(e);
   const body = await readBody(e);
   const schema = z
     .object({
@@ -21,7 +23,8 @@ export default defineEventHandler(async (e) => {
     await FamilyModel.updateOne(
       { _id: id },
       {
-        $push: { invites: email },
+        $pull: { invites: email },
+        $push: { members: user?.id },
       }
     );
     return true;

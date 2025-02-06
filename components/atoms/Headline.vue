@@ -16,9 +16,12 @@
   >
     <slot />
   </h3>
-  <h3 v-if="size === 4" class="text-2xl text-blue-950 font-bold font-figtree">
+  <h4 v-if="size === 4" class="text-2xl text-blue-950 font-bold font-figtree">
     <slot />
-  </h3>
+  </h4>
+  <h5 v-if="size === 5" class="text-xl text-blue-950 font-bold font-figtree">
+    <slot />
+  </h5>
 </template>
 
 <script setup lang="ts">

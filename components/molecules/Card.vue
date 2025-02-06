@@ -4,7 +4,7 @@
       v-if="icon || title"
       class="flex gap-6 items-center justify-between"
     >
-      <div class="flex gap-8 items-center">
+      <div class="flex gap-6 items-center">
         <div
           v-if="icon"
           class="w-16 h-16 flex-none rounded-full bg-rose-50 flex justify-center items-center"

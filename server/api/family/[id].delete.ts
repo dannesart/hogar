@@ -7,7 +7,7 @@ export default defineEventHandler(async (e) => {
   try {
     const id = e.context.params?.id;
     if (!id) throw Error("Missing id");
-    await FamilyModel.findOneAndDelete({ _id: id }).exec();
+    await FamilyModel.deleteOne({ _id: id }).exec();
     return true;
   } catch (error) {
     return false;
