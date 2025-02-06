@@ -10,17 +10,23 @@ type Family = {
 
 type State = {
   _families: Family[];
+  _loading: boolean;
 };
 
 export const useFamilyStore = defineStore("FamilyStore", {
   state: () =>
     <State>{
       _families: [],
+      _loading: true,
     },
   getters: {
     families: (state) => state._families,
+    loading: (state) => state._loading,
   },
   actions: {
+    setLoading(loading: boolean) {
+      this._loading = loading;
+    },
     setFamilies(families: Family[]) {
       this._families = families;
     },
@@ -64,8 +70,12 @@ export const useFamilyStore = defineStore("FamilyStore", {
         );
         if (response.data) {
           this.setFamilies(response.data);
+          this.setLoading(false);
         }
-      } catch (error) {}
+      } catch (error) {
+        this.setLoading(false);
+      }
     },
+    async inviteToFamily(familyId: string, email: string) {},
   },
 });

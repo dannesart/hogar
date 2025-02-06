@@ -6,10 +6,17 @@
     <section>
       <div
         class="p-5 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10"
-        v-if="!families.length"
+        v-if="!families.length && !loading"
       >
         <AtomsHeadline :size="3"> It looks so empty in here :( </AtomsHeadline>
         <AtomsButton @click="toggleCreateFamiliy">Create family</AtomsButton>
+      </div>
+      <div
+        class="p-5 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10"
+        v-if="loading"
+      >
+        <div class="w-full h-10 bg-gray-200 animate-pulse"></div>
+        <div class="w-8/12 h-6 bg-gray-200 animate-pulse"></div>
       </div>
 
       <div class="flex flex-col gap-5">
@@ -45,6 +52,24 @@
         </template>
       </AtomsModal>
 
+      <AtomsModal v-if="showInvite" @close="toggleInviteFamily">
+        <template v-slot:header>
+          <AtomsHeadline :size="2">Invite</AtomsHeadline>
+        </template>
+        <div class="flex flex-col gap-5">
+          <AtomsInput
+            :type="'email'"
+            :placeholder="'Email'"
+            :icon="'lucide:at-sign'"
+            :value="inviteEmail"
+            @update="updateEmail"
+          />
+        </div>
+        <template v-slot:footer>
+          <AtomsButton @click="inviteFamily"> Invite </AtomsButton>
+        </template>
+      </AtomsModal>
+
       <MoleculesAction
         v-if="families.length"
         @action="toggleCreateFamiliy"
@@ -70,14 +95,16 @@ definePageMeta({
   middleware: "auth",
 });
 const familyStore = useFamilyStore();
-const { newFamily, deleteFamily } = familyStore;
-const { families } = storeToRefs(familyStore);
+const { newFamily, deleteFamily, inviteToFamily } = familyStore;
+const { families, loading } = storeToRefs(familyStore);
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 
 const isShowingCreateFamilyModal = ref(false);
 const familyName = ref();
+const inviteEmail = ref();
 const showConfirm = ref(false);
+const showInvite = ref(false);
 const activeFamilyId = ref();
 
 const toggleCreateFamiliy = () => {
@@ -87,10 +114,18 @@ const toggleCreateFamiliy = () => {
 const updateName = (e: any) => {
   familyName.value = e;
 };
+const updateEmail = (e: any) => {
+  inviteEmail.value = e;
+};
 
 const createFamily = async () => {
   if (familyName.value) await newFamily(familyName.value);
   toggleCreateFamiliy();
+};
+const inviteFamily = async () => {
+  if (inviteEmail.value)
+    await inviteToFamily(activeFamilyId.value, inviteEmail.value);
+  toggleInviteFamily("");
 };
 
 const confirmDeleteFamily = async () => {
@@ -103,8 +138,13 @@ const toggleConfirmDeleteFamily = async (familyId: string) => {
   showConfirm.value = !showConfirm.value;
   activeFamilyId.value = familyId;
 };
+const toggleInviteFamily = async (familyId: string) => {
+  showInvite.value = !showInvite.value;
+  activeFamilyId.value = familyId;
+};
 
 const handleAction = async (actionId: string, familyId: string) => {
   if (actionId === "delete") toggleConfirmDeleteFamily(familyId);
+  if (actionId === "invite") toggleInviteFamily(familyId);
 };
 </script>

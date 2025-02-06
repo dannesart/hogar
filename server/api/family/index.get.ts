@@ -6,7 +6,7 @@ export default defineEventHandler(async (e) => {
   await protectRoute(e);
   const user = await serverSupabaseUser(e);
   const families = await FamilyModel.find({
-    createdBy: user?.id,
+    members: user?.id,
   });
 
   return (

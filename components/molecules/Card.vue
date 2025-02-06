@@ -20,7 +20,10 @@
         :style="'transparent'"
         :size="'small'"
         @action="handleAction"
-        :actions="[{ label: 'Delete', actionId: 'delete' }]"
+        :actions="[
+          { label: 'Delete', actionId: 'delete' },
+          { label: 'Invite', actionId: 'invite' },
+        ]"
         v-if="editable"
       ></MoleculesAction>
     </header>
