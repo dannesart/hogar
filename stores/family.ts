@@ -37,6 +37,10 @@ export const useFamilyStore = defineStore("FamilyStore", {
       const idx = this._families.findIndex((family) => family.id === id);
       this._families.splice(idx, 1);
     },
+    removeInvite(id: string) {
+      const idx = this._invites.findIndex((invite) => invite.id === id);
+      this._invites.splice(idx, 1);
+    },
     async newFamily(title: string) {
       try {
         const config = useRuntimeConfig();
@@ -86,6 +90,23 @@ export const useFamilyStore = defineStore("FamilyStore", {
           this.setInvites(response.data);
         }
       } catch (error) {}
+    },
+    async acceptInvite(familyId: string) {
+      try {
+        const config = useRuntimeConfig();
+        const response = await axios.patch(
+          config.public.BASE_URL + "/api/invite",
+          {
+            id: familyId,
+          }
+        );
+        if (response.data) {
+          this.removeInvite(familyId);
+          await this.fetchFamilies();
+        }
+      } catch (error) {
+        this.setLoading(false);
+      }
     },
     async inviteToFamily(familyId: string, email: string) {
       try {

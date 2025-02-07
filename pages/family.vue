@@ -55,7 +55,9 @@
             </div>
             <div class="flex gap-6">
               <AtomsButton :variant="'transparent'">Decline</AtomsButton>
-              <AtomsButton>Join family</AtomsButton>
+              <AtomsButton @click="handleAcceptInvite(invites[0].id || '')"
+                >Join family</AtomsButton
+              >
             </div>
           </div>
         </template>
@@ -126,7 +128,7 @@ definePageMeta({
   middleware: "auth",
 });
 const familyStore = useFamilyStore();
-const { newFamily, deleteFamily, inviteToFamily } = familyStore;
+const { newFamily, deleteFamily, inviteToFamily, acceptInvite } = familyStore;
 const { families, loading, invites } = storeToRefs(familyStore);
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
@@ -158,6 +160,10 @@ const inviteFamily = async () => {
   if (inviteEmail.value)
     await inviteToFamily(activeFamilyId.value, inviteEmail.value);
   toggleInviteFamily("");
+};
+
+const handleAcceptInvite = async (familyId: string) => {
+  await acceptInvite(familyId);
 };
 
 const confirmDeleteFamily = async () => {
