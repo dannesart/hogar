@@ -24,6 +24,6 @@ useHead({
 });
 
 const { fetchUser } = useUserStore();
-const { fetchFamilies } = useFamilyStore();
-await Promise.all([fetchUser(), fetchFamilies()]);
+const { fetchFamilies, fetchInvites } = useFamilyStore();
+await Promise.all([fetchUser(), fetchFamilies(), fetchInvites()]);
 </script>

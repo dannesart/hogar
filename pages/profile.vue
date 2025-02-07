@@ -20,7 +20,7 @@
           :type="'email'"
           :value="user?.email"
           :placeholder="'Email'"
-          :icon="'meteor-icons:envelope'"
+          :icon="'lucide:at-sign'"
           :disabled="true"
         ></AtomsInput>
       </article>

@@ -1,22 +1,11 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-
-type Family = {
-  title: string;
-  members: string[];
-  createdBy: string;
-  id: string;
-};
-
-type Invite = {
-  sender: string;
-  id: string;
-};
+import type { Family } from "~/models/family";
 
 type State = {
   _families: Family[];
   _loading: boolean;
-  _invites: Invite[];
+  _invites: Family[];
 };
 
 export const useFamilyStore = defineStore("FamilyStore", {
@@ -41,7 +30,7 @@ export const useFamilyStore = defineStore("FamilyStore", {
     setFamily(family: Family) {
       this._families.push(family);
     },
-    setInvites(invites: Invite[]) {
+    setInvites(invites: Family[]) {
       this._invites = invites;
     },
     removeFamily(id: string) {
@@ -86,6 +75,17 @@ export const useFamilyStore = defineStore("FamilyStore", {
       } catch (error) {
         this.setLoading(false);
       }
+    },
+    async fetchInvites() {
+      try {
+        const config = useRuntimeConfig();
+        const response = await axios.get(
+          config.public.BASE_URL + "/api/invite"
+        );
+        if (response.data) {
+          this.setInvites(response.data);
+        }
+      } catch (error) {}
     },
     async inviteToFamily(familyId: string, email: string) {
       try {

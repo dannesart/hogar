@@ -17,9 +17,9 @@
           <Icon name="meteor-icons:google" size="30" />
           Google
         </AtomsButton>
-        <AtomsButton :variant="'secondary'" @click="social('github')">
+        <!-- <AtomsButton :variant="'secondary'" @click="social('github')">
           <Icon name="meteor-icons:github" size="30" /> Github</AtomsButton
-        >
+        > -->
       </div>
     </div>
   </div>

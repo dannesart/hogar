@@ -4,50 +4,62 @@
       <AtomsHeadline :size="3">Family</AtomsHeadline>
     </template>
     <section>
-      <!-- Empty -->
-      <div
-        class="p-5 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10"
-        v-if="!families.length && !loading"
-      >
-        <AtomsHeadline :size="3"> It looks so empty in here :( </AtomsHeadline>
-        <AtomsButton @click="toggleCreateFamiliy">Create family</AtomsButton>
-      </div>
-      <!-- Loading -->
-      <div
-        class="p-5 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10"
-        v-if="loading"
-      >
-        <div class="w-full h-10 bg-gray-200 animate-pulse"></div>
-        <div class="w-8/12 h-6 bg-gray-200 animate-pulse"></div>
-      </div>
-      <!-- Families -->
-      <div class="flex flex-col gap-5">
-        <MoleculesCard
-          v-for="family in families"
-          :title="family.title"
-          :icon="'lucide:users-round'"
-          :editable="family.createdBy === user.id"
-          @action="($event) => handleAction($event, family.id)"
-        ></MoleculesCard>
-      </div>
-
-      <!-- Invites-->
-      <div
-        class="p-5 mt-6 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10"
-        v-if="invites.length"
-      >
-        <div class="flex gap-6 items-center">
+      <MoleculesTabs :tabs="['families', 'invites']">
+        <template v-slot:families>
+          <!-- Empty -->
           <div
-            class="w-16 h-16 flex-none rounded-full bg-rose-50 flex justify-center items-center"
+            class="p-5 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10"
+            v-if="!families.length && !loading"
           >
-            <Icon name="lucide:users-round" :size="30" />
+            <AtomsHeadline :size="3">
+              It looks so empty in here :(
+            </AtomsHeadline>
+            <AtomsButton @click="toggleCreateFamiliy"
+              >Create family</AtomsButton
+            >
           </div>
-          <AtomsHeadline :size="5">
-            {{ invites[0].sender }} has invited you to here family
-          </AtomsHeadline>
-        </div>
-        <AtomsButton>Join family</AtomsButton>
-      </div>
+          <!-- Loading -->
+          <div
+            class="p-5 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10"
+            v-if="loading"
+          >
+            <div class="w-full h-10 bg-gray-200 animate-pulse"></div>
+            <div class="w-8/12 h-6 bg-gray-200 animate-pulse"></div>
+          </div>
+          <!-- Families -->
+          <div class="flex flex-col gap-5">
+            <MoleculesCard
+              v-for="family in families"
+              :title="family.title"
+              :icon="'lucide:users-round'"
+              :editable="family.createdBy === user.id"
+              @action="($event) => handleAction($event, family.id || '')"
+            ></MoleculesCard>
+          </div>
+        </template>
+        <template v-slot:invites>
+          <!-- Invites-->
+          <div
+            class="p-5 mt-6 md:p-10 bg-gray-50 rounded-2xl flex flex-col gap-6 mb-10"
+            v-if="invites.length"
+          >
+            <div class="flex gap-6 items-center">
+              <div
+                class="w-16 h-16 flex-none rounded-full bg-rose-50 flex justify-center items-center"
+              >
+                <Icon name="lucide:users-round" :size="30" />
+              </div>
+              <AtomsHeadline :size="5">
+                You have been invited to '{{ invites[0].title }}'
+              </AtomsHeadline>
+            </div>
+            <div class="flex gap-6">
+              <AtomsButton :variant="'transparent'">Decline</AtomsButton>
+              <AtomsButton>Join family</AtomsButton>
+            </div>
+          </div>
+        </template>
+      </MoleculesTabs>
 
       <AtomsModal
         v-if="isShowingCreateFamilyModal"
