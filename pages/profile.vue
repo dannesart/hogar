@@ -9,7 +9,7 @@
       >
         <ClientOnly>
           <img
-            :src="user?.user_metadata?.picture"
+            :src="user?.picture"
             class="w-32 h-32 rounded-full object-cover relative top-20 md:top-24"
           />
         </ClientOnly>
@@ -23,7 +23,20 @@
           :icon="'lucide:at-sign'"
           :disabled="true"
         ></AtomsInput>
+        <AtomsInput
+          :type="'text'"
+          :value="baseDisplayName"
+          :placeholder="'Display name'"
+          :icon="'lucide:user-pen'"
+          :disabled="false"
+          s
+          @update="($event) => (baseDisplayName = $event)"
+        ></AtomsInput>
+        <AtomsButton :variant="'secondary'" @click="saveBaseInformation">
+          Save base information
+        </AtomsButton>
       </article>
+
       <article class="grid gap-3">
         <AtomsHeadline :size="4"> Other </AtomsHeadline>
         <AtomsButton @click="handleLogout"> Log me out, please. </AtomsButton>
@@ -38,8 +51,12 @@ import { useUserStore } from "~~/stores/user";
 
 const userClient = useSupabaseClient();
 const router = useRouter();
+const userStore = useUserStore();
 
-const { user } = storeToRefs(useUserStore());
+const { user } = storeToRefs(userStore);
+const { patchUser } = userStore;
+
+const baseDisplayName = ref(user.value?.displayName);
 
 const handleLogout = async () => {
   try {
@@ -49,5 +66,11 @@ const handleLogout = async () => {
   } catch (error) {
     console.log(error);
   }
+};
+
+const saveBaseInformation = async () => {
+  if (!baseDisplayName.value) return;
+
+  await patchUser(baseDisplayName.value);
 };
 </script>

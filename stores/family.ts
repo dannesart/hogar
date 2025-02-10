@@ -108,6 +108,19 @@ export const useFamilyStore = defineStore("FamilyStore", {
         this.setLoading(false);
       }
     },
+    async declineInvite(familyId: string) {
+      try {
+        const config = useRuntimeConfig();
+        const response = await axios.delete(
+          config.public.BASE_URL + "/api/invite/" + familyId
+        );
+        if (response.data) {
+          this.removeInvite(familyId);
+        }
+      } catch (error) {
+        this.setLoading(false);
+      }
+    },
     async inviteToFamily(familyId: string, email: string) {
       try {
         const config = useRuntimeConfig();
@@ -119,6 +132,22 @@ export const useFamilyStore = defineStore("FamilyStore", {
           }
         );
         if (response.data) {
+        }
+      } catch (error) {
+        this.setLoading(false);
+      }
+    },
+    async leaveFamily(familyId: string) {
+      try {
+        const config = useRuntimeConfig();
+        const response = await axios.patch(
+          config.public.BASE_URL + "/api/family/leave",
+          {
+            id: familyId,
+          }
+        );
+        if (response.data) {
+          this.removeFamily(familyId);
         }
       } catch (error) {
         this.setLoading(false);

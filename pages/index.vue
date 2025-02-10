@@ -3,23 +3,20 @@
     <template v-slot:header>
       <AtomsHeadline :size="3">Hogar</AtomsHeadline>
     </template>
-    <div v-if="userObject" class="grid gap-8">
+    <div v-if="user" class="grid gap-8">
       <h1 class="text-6xl text-blue-950 font-extrabold font-figtree">
         Welcome,
-        <span class="text-rose-300">
-          {{
-            userObject.user_metadata?.user_name ||
-            userObject.user_metadata?.name?.split(" ")[0] ||
-            userObject.user_metadata?.full_name?.split(" ")[0]
-          }}.</span
-        >
+        <span class="text-rose-300"> {{ user.displayName }}.</span>
       </h1>
     </div>
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-const userObject = useSupabaseUser();
+import { storeToRefs } from "pinia";
+import { useUserStore } from "~~/stores/user";
+
+const { user } = storeToRefs(useUserStore());
 </script>
 
 <script lang="ts">

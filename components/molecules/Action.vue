@@ -12,26 +12,26 @@
       <AtomsHeadline :size="2"> More </AtomsHeadline>
     </template>
     <div class="flex flex-col gap-5">
-      <AtomsButton
-        v-for="action in actions"
-        @click="handleMoreAction(action.actionId)"
-        :variant="action.variant"
-      >
-        {{ action.label }}
-      </AtomsButton>
+      <template v-for="action in actions">
+        <AtomsButton
+          v-if="!action.disabled"
+          @click="handleMoreAction(action.actionId)"
+          :variant="action.variant"
+        >
+          {{ action.label }}
+        </AtomsButton>
+      </template>
     </div>
   </AtomsModal>
 </template>
 
 <script setup lang="ts">
+import type { Action } from "~/types/Action";
+
 type Props = {
   variant?: "add" | "more" | "delete";
   style?: "default" | "transparent";
-  actions?: {
-    label: string;
-    actionId: string;
-    variant?: "primary" | "secondary" | "transparent";
-  }[];
+  actions?: Action[];
   size?: "default" | "small";
   float?: boolean;
 };

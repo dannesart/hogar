@@ -20,25 +20,26 @@
         :style="'transparent'"
         :size="'small'"
         @action="handleAction"
-        :actions="[
-          { label: 'Delete', actionId: 'delete', variant: 'transparent' },
-          { label: 'Invite', actionId: 'invite' },
-        ]"
+        :actions="actions"
         v-if="editable"
       ></MoleculesAction>
     </header>
-
-    <slot />
+    <div v-if="$slots.default" class="pl-20">
+      <slot />
+    </div>
   </article>
 </template>
 
 <script setup lang="ts">
+import type { Action } from "~/types/Action";
+
 type Props = {
   title?: string;
   icon?: string;
   editable?: boolean;
+  actions?: Action[];
 };
-const { title, icon, editable = false } = defineProps<Props>();
+const { title, icon, editable = false, actions = [] } = defineProps<Props>();
 
 const emits = defineEmits(["edit", "action"]);
 

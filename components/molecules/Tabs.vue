@@ -3,7 +3,7 @@
     <div
       v-for="tab in tabs"
       v-wave
-      class="px-10 py-4 rounded-full text-xl font-bold text-blue-950 capitalize"
+      class="px-10 py-4 rounded-full text-xl font-bold text-blue-950 capitalize cursor-pointer"
       @click="activeTab = tab"
       :class="{ 'bg-gray-100': activeTab === tab }"
     >

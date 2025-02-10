@@ -33,8 +33,41 @@
               :title="family.title"
               :icon="'lucide:users-round'"
               :editable="family.createdBy === user.id"
+              :actions="[
+                {
+                  label: 'Invite',
+                  actionId: 'invite',
+                  disabled: family.createdBy !== user.id,
+                },
+                {
+                  label: 'Members',
+                  actionId: 'members',
+                  variant: 'secondary',
+                  disabled: false,
+                },
+                {
+                  label: 'Delete',
+                  actionId: 'delete',
+                  variant: 'transparent',
+                  disabled: family.createdBy !== user.id,
+                },
+                {
+                  label: 'Leave',
+                  actionId: 'leave',
+                  variant: 'transparent',
+                  disabled: family.createdBy === user.id,
+                },
+              ]"
               @action="($event) => handleAction($event, family.id || '')"
-            ></MoleculesCard>
+            >
+              <AtomsTag
+                :clickable="true"
+                @click="toggleMembers(family.id || '')"
+                >{{ family.members.length }} member{{
+                  family.members.length > 1 ? "s" : ""
+                }}</AtomsTag
+              >
+            </MoleculesCard>
           </div>
         </template>
         <template v-slot:invites>
@@ -54,7 +87,11 @@
               </AtomsHeadline>
             </div>
             <div class="flex gap-6">
-              <AtomsButton :variant="'transparent'">Decline</AtomsButton>
+              <AtomsButton
+                @click="handleDeclineInvite(invites[0].id || '')"
+                :variant="'transparent'"
+                >Decline</AtomsButton
+              >
               <AtomsButton @click="handleAcceptInvite(invites[0].id || '')"
                 >Join family</AtomsButton
               >
@@ -62,7 +99,7 @@
           </div>
         </template>
       </MoleculesTabs>
-
+      <!-- Modals -->
       <AtomsModal
         v-if="isShowingCreateFamilyModal"
         @close="toggleCreateFamiliy"
@@ -103,18 +140,36 @@
         </template>
       </AtomsModal>
 
+      <AtomsModal v-if="showMembers" @close="toggleMembers">
+        <template v-slot:header>
+          <AtomsHeadline :size="2">Members</AtomsHeadline>
+        </template>
+        <div class="flex flex-col gap-5">
+          <div v-for="member in activeFamily.members">
+            <MoleculesCard :title="member" :icon="'lucide:user-round'">
+            </MoleculesCard>
+          </div>
+        </div>
+      </AtomsModal>
+      <!-- Page actions -->
       <MoleculesAction
-        v-if="families.length && families.length <= maxFamilies"
+        v-if="families.length && families.length < maxFamilies"
         @action="toggleCreateFamiliy"
         :variant="'add'"
         :float="true"
       ></MoleculesAction>
-
+      <!-- Confirms -->
       <MoleculesConfirm
         :show="showConfirm"
         :title="'Delete family'"
         @confirm="confirmDeleteFamily"
         @close="toggleConfirmDeleteFamily('')"
+      ></MoleculesConfirm>
+      <MoleculesConfirm
+        :show="showLeave"
+        :title="'Leave family'"
+        @confirm="confirmLeaveFamily"
+        @close="toggleLeave('')"
       ></MoleculesConfirm>
     </section>
   </NuxtLayout>
@@ -128,7 +183,14 @@ definePageMeta({
   middleware: "auth",
 });
 const familyStore = useFamilyStore();
-const { newFamily, deleteFamily, inviteToFamily, acceptInvite } = familyStore;
+const {
+  newFamily,
+  deleteFamily,
+  leaveFamily,
+  inviteToFamily,
+  acceptInvite,
+  declineInvite,
+} = familyStore;
 const { families, loading, invites } = storeToRefs(familyStore);
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
@@ -139,7 +201,18 @@ const familyName = ref();
 const inviteEmail = ref();
 const showConfirm = ref(false);
 const showInvite = ref(false);
+const showLeave = ref(false);
+const showMembers = ref(false);
 const activeFamilyId = ref();
+
+const activeFamily = computed(() => {
+  if (!activeFamilyId.value) return { members: [] };
+  return (
+    families.value.find((family) => family.id === activeFamilyId.value) || {
+      members: [],
+    }
+  );
+});
 
 const toggleCreateFamiliy = () => {
   isShowingCreateFamilyModal.value = !isShowingCreateFamilyModal.value;
@@ -165,24 +238,42 @@ const inviteFamily = async () => {
 const handleAcceptInvite = async (familyId: string) => {
   await acceptInvite(familyId);
 };
+const handleDeclineInvite = async (familyId: string) => {
+  await declineInvite(familyId);
+};
+const confirmLeaveFamily = async (familyId: string) => {
+  if (!activeFamilyId.value) return;
+  await leaveFamily(activeFamilyId.value);
+  toggleLeave("");
+};
 
 const confirmDeleteFamily = async () => {
-  await familyName.value;
+  if (!activeFamilyId.value) return;
   await deleteFamily(activeFamilyId.value);
   toggleConfirmDeleteFamily("");
 };
 
-const toggleConfirmDeleteFamily = async (familyId: string) => {
+const toggleConfirmDeleteFamily = (familyId: string) => {
   showConfirm.value = !showConfirm.value;
   activeFamilyId.value = familyId;
 };
-const toggleInviteFamily = async (familyId: string) => {
+const toggleInviteFamily = (familyId: string) => {
   showInvite.value = !showInvite.value;
   activeFamilyId.value = familyId;
 };
+const toggleMembers = (familyId: string) => {
+  showMembers.value = !showMembers.value;
+  activeFamilyId.value = familyId;
+};
+const toggleLeave = (familyId: string) => {
+  showLeave.value = !showLeave.value;
+  activeFamilyId.value = familyId;
+};
 
-const handleAction = async (actionId: string, familyId: string) => {
+const handleAction = (actionId: string, familyId: string) => {
   if (actionId === "delete") toggleConfirmDeleteFamily(familyId);
   if (actionId === "invite") toggleInviteFamily(familyId);
+  if (actionId === "members") toggleMembers(familyId);
+  if (actionId === "leave") toggleLeave(familyId);
 };
 </script>
