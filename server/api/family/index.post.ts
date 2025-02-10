@@ -1,7 +1,6 @@
 import type { Family } from "~~/models/family";
 import { FamilySchema } from "~~/models/family";
 import { FamilyModel } from "~~/models/family.db";
-import { serverSupabaseUser } from "#supabase/server";
 import protectRoute from "~/server/protectedRoute";
 
 const newFamily = (title: string, createdBy: string) => {
@@ -19,11 +18,10 @@ const newFamily = (title: string, createdBy: string) => {
 
 export default defineEventHandler(async (e) => {
   await protectRoute(e);
-  const user = await serverSupabaseUser(e);
 
   const body = await readBody(e);
 
-  const newFamilyObject = newFamily(body.title, user?.id || "Missing token");
+  const newFamilyObject = newFamily(body.title, body.userId || "Missing token");
   const valid = await FamilySchema.safeParse(newFamilyObject);
   if (valid.success) {
     try {

@@ -18,12 +18,16 @@ export default defineEventHandler(async (event) => {
     email: authUser.email,
     picture,
     providerId: authUser.id,
+    id: "",
   };
 
   const dbUser = await UserModel.findOne({
     providerId: authUser.id,
   });
   if (dbUser) {
+    if (dbUser._id) {
+      user.id = dbUser._id.toString();
+    }
     if (dbUser.displayName) {
       user.displayName = dbUser.displayName;
     }

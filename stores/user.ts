@@ -1,12 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-
-type User = {
-  email: string;
-  id: string;
-  picture: string;
-  displayName: string;
-};
+import type { User } from "~/models/user";
 
 type State = {
   user: User;

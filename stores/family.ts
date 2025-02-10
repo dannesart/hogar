@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import type { Family } from "~/models/family";
+import type { User } from "~/models/user";
 
 type State = {
   _families: Family[];
@@ -41,13 +42,14 @@ export const useFamilyStore = defineStore("FamilyStore", {
       const idx = this._invites.findIndex((invite) => invite.id === id);
       this._invites.splice(idx, 1);
     },
-    async newFamily(title: string) {
+    async newFamily(title: string, user: User) {
       try {
         const config = useRuntimeConfig();
         const response = await axios.post(
           config.public.BASE_URL + "/api/family",
           {
             title,
+            userId: user.id,
           }
         );
         if (response.data) {
@@ -70,7 +72,7 @@ export const useFamilyStore = defineStore("FamilyStore", {
       try {
         const config = useRuntimeConfig();
         const response = await axios.get(
-          config.public.BASE_URL + "/api/family"
+          config.public.BASE_URL + "/api/family/"
         );
         if (response.data) {
           this.setFamilies(response.data);
@@ -91,13 +93,14 @@ export const useFamilyStore = defineStore("FamilyStore", {
         }
       } catch (error) {}
     },
-    async acceptInvite(familyId: string) {
+    async acceptInvite(familyId: string, user: User) {
       try {
         const config = useRuntimeConfig();
         const response = await axios.patch(
           config.public.BASE_URL + "/api/invite",
           {
             id: familyId,
+            userId: user.id,
           }
         );
         if (response.data) {
@@ -137,13 +140,14 @@ export const useFamilyStore = defineStore("FamilyStore", {
         this.setLoading(false);
       }
     },
-    async leaveFamily(familyId: string) {
+    async leaveFamily(familyId: string, user: User) {
       try {
         const config = useRuntimeConfig();
         const response = await axios.patch(
           config.public.BASE_URL + "/api/family/leave",
           {
             id: familyId,
+            userId: user.id,
           }
         );
         if (response.data) {

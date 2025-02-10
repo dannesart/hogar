@@ -146,7 +146,10 @@
         </template>
         <div class="flex flex-col gap-5">
           <div v-for="member in activeFamily.members">
-            <MoleculesCard :title="member" :icon="'lucide:user-round'">
+            <MoleculesCard
+              :title="member.displayName"
+              :icon="'lucide:user-round'"
+            >
             </MoleculesCard>
           </div>
         </div>
@@ -178,6 +181,7 @@
 import { storeToRefs } from "pinia";
 import { useFamilyStore } from "~~/stores/family";
 import { useUserStore } from "~~/stores/user";
+import type { User } from "~/models/user";
 
 definePageMeta({
   middleware: "auth",
@@ -206,12 +210,14 @@ const showMembers = ref(false);
 const activeFamilyId = ref();
 
 const activeFamily = computed(() => {
-  if (!activeFamilyId.value) return { members: [] };
-  return (
-    families.value.find((family) => family.id === activeFamilyId.value) || {
-      members: [],
-    }
+  let family = {} as any;
+
+  const f = [...families.value].find(
+    (family) => family.id === activeFamilyId.value
   );
+  family = { ...f, members: f?.members };
+
+  return family;
 });
 
 const toggleCreateFamiliy = () => {
@@ -226,7 +232,7 @@ const updateEmail = (e: any) => {
 };
 
 const createFamily = async () => {
-  if (familyName.value) await newFamily(familyName.value);
+  if (familyName.value) await newFamily(familyName.value, user.value);
   toggleCreateFamiliy();
 };
 const inviteFamily = async () => {
@@ -236,14 +242,14 @@ const inviteFamily = async () => {
 };
 
 const handleAcceptInvite = async (familyId: string) => {
-  await acceptInvite(familyId);
+  await acceptInvite(familyId, user.value);
 };
 const handleDeclineInvite = async (familyId: string) => {
   await declineInvite(familyId);
 };
 const confirmLeaveFamily = async (familyId: string) => {
   if (!activeFamilyId.value) return;
-  await leaveFamily(activeFamilyId.value);
+  await leaveFamily(activeFamilyId.value, user.value);
   toggleLeave("");
 };
 

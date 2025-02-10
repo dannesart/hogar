@@ -7,6 +7,7 @@ const UserSchema = z
     providerId: z.string(),
     status: z.string(),
     picture: z.string(),
+    email: z.string(),
   })
   .strict();
 

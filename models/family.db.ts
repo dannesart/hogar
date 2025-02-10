@@ -1,5 +1,6 @@
 import { model, Model, Schema } from "mongoose";
 import type { Family } from "./family";
+import { UserModel } from "./user.db";
 
 const FamilyDbSchema: Schema<Family> = new Schema({
   title: String,
@@ -7,7 +8,7 @@ const FamilyDbSchema: Schema<Family> = new Schema({
   created: { type: Date, default: Date.now },
   updatedBy: String,
   updated: { type: Date, default: Date.now },
-  members: [String],
+  members: [{ type: Schema.Types.ObjectId, ref: UserModel }],
   invites: [String],
 });
 
