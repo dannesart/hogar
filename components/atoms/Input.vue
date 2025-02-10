@@ -17,10 +17,10 @@
         'pl-16': !!icon,
       }"
     />
-    <label v-if="label"
+    <!-- <label v-if="label" class="absolute top-1 left-16 text-gray-400 text-xs"
       >{{ label }}
       {{ !required ? "(optional)" : "" }}
-    </label>
+    </label> -->
     <Icon v-if="icon" :name="icon" size="30" class="absolute left-5 top-5" />
     <div
       v-if="disabled"

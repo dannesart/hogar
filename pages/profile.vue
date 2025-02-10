@@ -14,27 +14,41 @@
           />
         </ClientOnly>
       </div>
+
       <article class="grid gap-3">
         <AtomsHeadline :size="4"> Base </AtomsHeadline>
-        <AtomsInput
-          :type="'email'"
-          :value="user?.email"
-          :placeholder="'Email'"
-          :icon="'lucide:at-sign'"
-          :disabled="true"
-        ></AtomsInput>
-        <AtomsInput
-          :type="'text'"
-          :value="baseDisplayName"
-          :placeholder="'Display name'"
-          :icon="'lucide:user-pen'"
-          :disabled="false"
-          s
-          @update="($event) => (baseDisplayName = $event)"
-        ></AtomsInput>
-        <AtomsButton :variant="'secondary'" @click="saveBaseInformation">
-          Save base information
-        </AtomsButton>
+        <div class="grid gap-6">
+          <AtomsInput
+            :type="'email'"
+            :value="user?.email"
+            :placeholder="'Email'"
+            :icon="'lucide:at-sign'"
+            :label="'Email'"
+            :required="true"
+            :disabled="true"
+          ></AtomsInput>
+
+          <div class="flex gap-6">
+            <AtomsInput
+              :type="'text'"
+              :value="baseDisplayName"
+              :placeholder="'Display name'"
+              :icon="'lucide:user-pen'"
+              :label="'Display name'"
+              :required="true"
+              :disabled="false"
+              :class="'flex-1'"
+              s
+              @update="($event) => (baseDisplayName = $event)"
+            ></AtomsInput>
+            <AtomsButton
+              :variant="hasChanges ? 'secondary' : 'transparent'"
+              @click="saveBaseInformation"
+            >
+              <Icon name="lucide:save" :size="30" />
+            </AtomsButton>
+          </div>
+        </div>
       </article>
 
       <article class="grid gap-3">
@@ -57,6 +71,9 @@ const { user } = storeToRefs(userStore);
 const { patchUser } = userStore;
 
 const baseDisplayName = ref(user.value?.displayName);
+const hasChanges = computed(() => {
+  return baseDisplayName.value !== user.value?.displayName;
+});
 
 const handleLogout = async () => {
   try {
