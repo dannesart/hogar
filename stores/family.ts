@@ -42,14 +42,13 @@ export const useFamilyStore = defineStore("FamilyStore", {
       const idx = this._invites.findIndex((invite) => invite.id === id);
       this._invites.splice(idx, 1);
     },
-    async newFamily(title: string, user: User) {
+    async newFamily(title: string) {
       try {
         const config = useRuntimeConfig();
         const response = await axios.post(
           config.public.BASE_URL + "/api/family",
           {
             title,
-            userId: user.id,
           }
         );
         if (response.data) {
@@ -93,14 +92,13 @@ export const useFamilyStore = defineStore("FamilyStore", {
         }
       } catch (error) {}
     },
-    async acceptInvite(familyId: string, user: User) {
+    async acceptInvite(familyId: string) {
       try {
         const config = useRuntimeConfig();
         const response = await axios.patch(
           config.public.BASE_URL + "/api/invite",
           {
             id: familyId,
-            userId: user.id,
           }
         );
         if (response.data) {
@@ -140,14 +138,13 @@ export const useFamilyStore = defineStore("FamilyStore", {
         this.setLoading(false);
       }
     },
-    async leaveFamily(familyId: string, user: User) {
+    async leaveFamily(familyId: string) {
       try {
         const config = useRuntimeConfig();
         const response = await axios.patch(
           config.public.BASE_URL + "/api/family/leave",
           {
             id: familyId,
-            userId: user.id,
           }
         );
         if (response.data) {
