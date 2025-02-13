@@ -1,6 +1,12 @@
 <template>
   <div class="flex flex-col h-svh">
     <header class="py-5 px-5 md:px-10 flex gap-4 items-center">
+      <Icon
+        name="lucide:arrow-left"
+        :size="30"
+        v-if="isChild"
+        @click.prevent="$router.back()"
+      />
       <slot name="header"></slot>
     </header>
     <main
@@ -26,6 +32,10 @@
 </template>
 
 <script setup lang="ts">
+const isChild = computed(() => {
+  return useRoute().path.split("/").length > 2;
+});
+
 const iconBase = "lucide:";
 const navs = [
   {
