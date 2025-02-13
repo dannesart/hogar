@@ -3,24 +3,29 @@
     <input
       :type="type"
       :required="required"
-      :placeholder="placeholder"
       :min="min"
       :max="max"
       :disabled="disabled"
+      placeholder=""
       :value="value"
       :autofocus="autofocus"
+      :id="id"
       @input="updateValue($event)"
-      class="p-5 rounded-xl text-2xl w-full"
+      class="h-[72px] rounded-xl text-2xl w-full peer"
       :class="{
         'bg-rose-100': notValid,
         'bg-gray-100 outline-gray-300': !notValid,
         'pl-16': !!icon,
+        'pt-4': !!label,
       }"
     />
-    <!-- <label v-if="label" class="absolute top-1 left-16 text-gray-400 text-xs"
+    <label
+      v-if="label"
+      :for="id"
+      class="absolute duration-300 top-5 left-16 text-gray-400 text-xl origin-[0] scale-75 -translate-y-4 peer-focus:-translate-y-4 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-placeholder-shown:translate-y-0"
       >{{ label }}
       {{ !required ? "(optional)" : "" }}
-    </label> -->
+    </label>
     <Icon v-if="icon" :name="icon" size="30" class="absolute left-5 top-5" />
     <div
       v-if="disabled"
@@ -36,21 +41,21 @@ type Props = {
   type?: "text" | "number" | "email";
   required?: boolean;
   disabled?: boolean;
-  placeholder?: string;
   min?: number;
   max?: number;
   label?: string;
   icon?: string;
   value?: string | number;
   autofocus?: boolean;
+  id?: string;
 };
 const {
   type = "text",
   required = false,
-  placeholder = "",
   label = "",
   disabled = false,
   autofocus = false,
+  id = crypto.randomUUID(),
 } = defineProps<Props>();
 
 const notValid = ref(false);

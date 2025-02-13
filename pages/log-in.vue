@@ -1,19 +1,18 @@
 <template>
-  <div class="p-10 flex flex-col justify-between h-svh sb relative">
+  <div class="p-10 flex flex-col justify-between h-svh bg-rose-50 relative">
     <AtomsHeadline :size="3"> Hogar </AtomsHeadline>
 
     <div
       class="flex flex-col gap-1 md:self-center md:w-full md:max-w-screen-sm font-figtree"
     >
       <h1 class="text-7xl text-blue-950 font-black">Let's move in together!</h1>
-
     </div>
 
     <div
       class="grid gap-8 sticky bottom-10 md:self-center z-10 md:w-full md:max-w-screen-sm"
     >
       <div class="flex flex-col gap-6 text-white justify-center">
-      <h2 class="text-4xl text-rose-300 font-extrabold">Sign in</h2>
+        <h2 class="text-4xl text-rose-300 font-extrabold">Sign in</h2>
         <AtomsButton @click="social('google')">
           <Icon name="meteor-icons:google" size="30" />
           Google
