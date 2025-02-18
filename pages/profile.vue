@@ -43,6 +43,7 @@
             ></AtomsInput>
             <AtomsButton
               :variant="hasChanges ? 'secondary' : 'transparent'"
+              :loading="isSaving"
               @click="saveBaseInformation"
             >
               <Icon name="lucide:save" :size="30" />
@@ -74,6 +75,7 @@ const baseDisplayName = ref(user.value?.displayName);
 const hasChanges = computed(() => {
   return baseDisplayName.value !== user.value?.displayName;
 });
+const isSaving = ref(false);
 
 const handleLogout = async () => {
   try {
@@ -87,7 +89,9 @@ const handleLogout = async () => {
 
 const saveBaseInformation = async () => {
   if (!baseDisplayName.value) return;
+  isSaving.value = true;
 
   await patchUser(baseDisplayName.value);
+  isSaving.value = false;
 };
 </script>

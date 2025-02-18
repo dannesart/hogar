@@ -4,15 +4,17 @@
     v-wave
     :class="variantClass()"
   >
-    <slot />
+    <slot v-if="!loading" />
+    <Icon v-if="loading" :name="'svg-spinners:3-dots-bounce'" :size="30" />
   </button>
 </template>
 
 <script setup lang="ts">
 type Props = {
   variant?: "primary" | "secondary" | "transparent";
+  loading?: boolean;
 };
-const { variant = "primary" } = defineProps<Props>();
+const { variant = "primary", loading = false } = defineProps<Props>();
 
 const variantClass = () => {
   return variant.toLowerCase();

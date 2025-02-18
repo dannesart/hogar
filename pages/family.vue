@@ -119,7 +119,9 @@
           />
         </div>
         <template v-slot:footer>
-          <AtomsButton @click="createFamily"> Create family </AtomsButton>
+          <AtomsButton @click="createFamily" :loading="isCreatingFamily">
+            Create family
+          </AtomsButton>
         </template>
       </AtomsModal>
 
@@ -210,6 +212,7 @@ const showInvite = ref(false);
 const showLeave = ref(false);
 const showMembers = ref(false);
 const activeFamilyId = ref();
+const isCreatingFamily = ref(false);
 
 const activeFamily = computed(() => {
   let family = {} as any;
@@ -234,8 +237,12 @@ const updateEmail = (e: any) => {
 };
 
 const createFamily = async () => {
-  if (familyName.value) await newFamily(familyName.value);
-  toggleCreateFamiliy();
+  if (familyName.value) {
+    isCreatingFamily.value = true;
+    await newFamily(familyName.value);
+    isCreatingFamily.value = false;
+    toggleCreateFamiliy();
+  }
 };
 const inviteFamily = async () => {
   if (inviteEmail.value)

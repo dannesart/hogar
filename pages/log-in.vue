@@ -13,7 +13,7 @@
     >
       <div class="flex flex-col gap-6 text-white justify-center">
         <AtomsHeadline :size="2" :variant="'light'">Sign in</AtomsHeadline>
-        <AtomsButton @click="social('google')">
+        <AtomsButton @click="social('google')" :loading="isLoginIn">
           <Icon name="meteor-icons:google" size="30" />
           Google
         </AtomsButton>
@@ -28,12 +28,15 @@
 <script setup lang="ts">
 import type { Provider } from "@supabase/auth-js";
 const supabase = useSupabaseClient();
+const isLoginIn = ref(false);
 
 const social = async (provider: Provider) => {
+  isLoginIn.value = true;
   await supabase.auth.signInWithOAuth({
     provider: provider,
     options: { redirectTo: "/" },
   });
+  isLoginIn.value = false;
 };
 </script>
 
