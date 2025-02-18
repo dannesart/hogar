@@ -45,7 +45,11 @@ const {
 const emits = defineEmits(["action"]);
 const showModal = ref(false);
 
-const toggleModal = () => {
+const toggleModal = (e?: Event) => {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   showModal.value = !showModal.value;
   emits("action", "toggle");
 };

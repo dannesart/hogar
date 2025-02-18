@@ -4,17 +4,19 @@
       v-if="icon || title"
       class="flex gap-6 items-center justify-between"
     >
-      <div class="flex gap-6 items-center">
+      <NuxtLink :to="link" class="flex gap-6 items-center">
         <div
           v-if="icon"
           class="w-16 h-16 flex-none rounded-full bg-rose-50 flex justify-center items-center"
         >
           <Icon :name="icon" :size="30" />
         </div>
-        <AtomsHeadline :size="4" v-if="title">
-          {{ title }}
-        </AtomsHeadline>
-      </div>
+        <div v-if="title" class="overflow-hidden text-ellipsis">
+          <AtomsHeadline :size="4">
+            {{ title }}
+          </AtomsHeadline>
+        </div>
+      </NuxtLink>
       <MoleculesAction
         :variant="'more'"
         :style="'transparent'"
@@ -38,8 +40,15 @@ type Props = {
   icon?: string;
   editable?: boolean;
   actions?: Action[];
+  link?: string;
 };
-const { title, icon, editable = false, actions = [] } = defineProps<Props>();
+const {
+  title,
+  icon,
+  editable = false,
+  actions = [],
+  link,
+} = defineProps<Props>();
 
 const emits = defineEmits(["edit", "action"]);
 

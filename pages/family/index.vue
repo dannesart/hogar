@@ -33,6 +33,7 @@
               :title="family.title"
               :icon="'lucide:users-round'"
               :editable="family.createdBy === user.id"
+              :link="'/family/' + family.id"
               :actions="[
                 {
                   label: 'Invite',
@@ -60,13 +61,6 @@
               ]"
               @action="($event) => handleAction($event, family.id || '')"
             >
-              <AtomsTag
-                :clickable="true"
-                @click="toggleMembers(family.id || '')"
-                >{{ family.members.length }} member{{
-                  family.members.length > 1 ? "s" : ""
-                }}</AtomsTag
-              >
             </MoleculesCard>
           </div>
         </template>

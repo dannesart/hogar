@@ -7,7 +7,9 @@
         v-if="isChild"
         @click.prevent="$router.back()"
       />
-      <slot name="header"></slot>
+      <div class="flex-1 overflow-hidden text-ellipsis">
+        <slot name="header" />
+      </div>
     </header>
     <main
       class="px-5 md:px-10 flex-1 max-w-screen-xl w-full self-center relative"
