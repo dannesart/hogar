@@ -3,7 +3,6 @@
     <input
       :type="type"
       :required="required"
-      :min="min"
       :max="max"
       :disabled="disabled"
       placeholder=""
@@ -37,6 +36,8 @@
 </template>
 
 <script setup lang="ts">
+import { z } from "zod";
+
 type Props = {
   type?: "text" | "number" | "email";
   required?: boolean;
@@ -56,12 +57,48 @@ const {
   disabled = false,
   autofocus = false,
   id = crypto.randomUUID(),
+  min = 0,
+  max = 500,
+  value,
 } = defineProps<Props>();
+const isDirty = ref(false);
 
-const notValid = ref(false);
+const validator = (value: string | number | undefined) => {
+  let schema;
+  switch (type) {
+    case "number":
+      schema = z
+        .number()
+        .min(min || 1)
+        .max(max);
+      break;
+    case "email":
+      schema = z
+        .string()
+        .email()
+        .min(min || 1)
+        .max(max);
+      break;
+    default:
+      schema = z
+        .string()
+        .min(min || 1)
+        .max(max);
+      break;
+  }
+  if (!required) schema = schema.min(min).optional();
+  return schema.safeParse(value);
+};
+
+const notValid = computed(() => {
+  if (!isDirty.value) return false;
+  const valid = validator(value).success;
+  return !valid;
+});
 
 const emits = defineEmits(["update"]);
 const updateValue = (event: Event) => {
+  isDirty.value = true;
   const newValue = (event.target as { value?: string }).value;
   emits("update", newValue);
 };

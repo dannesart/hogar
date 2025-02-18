@@ -4,10 +4,10 @@
       <AtomsHeadline :size="3">Hogar</AtomsHeadline>
     </template>
     <div v-if="user" class="grid gap-8">
-      <h1 class="text-6xl text-blue-950 font-extrabold font-figtree">
+      <AtomsHeadline :size="1">
         Welcome,
         <span class="text-rose-300"> {{ user.displayName }}.</span>
-      </h1>
+      </AtomsHeadline>
     </div>
   </NuxtLayout>
 </template>

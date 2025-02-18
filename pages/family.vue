@@ -110,8 +110,9 @@
         <div class="flex flex-col gap-5">
           <AtomsInput
             :type="'text'"
-            :placeholder="'Name'"
+            :label="'Name'"
             :icon="'lucide:letter-text'"
+            :required="true"
             :autofocus="true"
             :value="familyName"
             @update="updateName"
@@ -129,7 +130,8 @@
         <div class="flex flex-col gap-5">
           <AtomsInput
             :type="'email'"
-            :placeholder="'Email'"
+            :label="'Email'"
+            :required="true"
             :icon="'lucide:at-sign'"
             :value="inviteEmail"
             @update="updateEmail"
@@ -232,7 +234,7 @@ const updateEmail = (e: any) => {
 };
 
 const createFamily = async () => {
-  if (familyName.value) await newFamily(familyName.value, user.value);
+  if (familyName.value) await newFamily(familyName.value);
   toggleCreateFamiliy();
 };
 const inviteFamily = async () => {
@@ -242,14 +244,14 @@ const inviteFamily = async () => {
 };
 
 const handleAcceptInvite = async (familyId: string) => {
-  await acceptInvite(familyId, user.value);
+  await acceptInvite(familyId);
 };
 const handleDeclineInvite = async (familyId: string) => {
   await declineInvite(familyId);
 };
 const confirmLeaveFamily = async (familyId: string) => {
   if (!activeFamilyId.value) return;
-  await leaveFamily(activeFamilyId.value, user.value);
+  await leaveFamily(activeFamilyId.value);
   toggleLeave("");
 };
 
