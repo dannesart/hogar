@@ -10,6 +10,7 @@ export default async (e: any) => {
     providerId: authUser?.id,
   });
   if (!dbUser) throw new Error("Missing profile");
+  const dbUserJSON = dbUser.toJSON();
 
-  return dbUser;
+  return { ...dbUserJSON, email: dbUserJSON.email || authUser.email };
 };
