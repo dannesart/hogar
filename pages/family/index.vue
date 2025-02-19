@@ -179,7 +179,6 @@
 import { storeToRefs } from "pinia";
 import { useFamilyStore } from "~~/stores/family";
 import { useUserStore } from "~~/stores/user";
-import type { User } from "~/models/user";
 
 definePageMeta({
   middleware: "auth",

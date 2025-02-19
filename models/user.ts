@@ -8,6 +8,7 @@ const UserSchema = z
     status: z.string(),
     picture: z.string(),
     email: z.string(),
+    _id: z.string().optional(),
   })
   .strict();
 

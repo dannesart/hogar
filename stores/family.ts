@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import type { Family } from "~/models/family";
-import type { User } from "~/models/user";
 
 type State = {
   _families: Family[];
+  _activeFamily: Family | undefined;
   _loading: boolean;
   _invites: Family[];
 };
@@ -13,6 +13,7 @@ export const useFamilyStore = defineStore("FamilyStore", {
   state: () =>
     <State>{
       _families: [],
+      _activeFamily: undefined,
       _loading: true,
       _invites: [],
     },
@@ -20,6 +21,7 @@ export const useFamilyStore = defineStore("FamilyStore", {
     families: (state) => state._families,
     loading: (state) => state._loading,
     invites: (state) => state._invites,
+    family: (state) => state._activeFamily,
   },
   actions: {
     setLoading(loading: boolean) {
@@ -30,6 +32,9 @@ export const useFamilyStore = defineStore("FamilyStore", {
     },
     setFamily(family: Family) {
       this._families.push(family);
+    },
+    setActiveFamily(family: Family) {
+      this._activeFamily = family;
     },
     setInvites(invites: Family[]) {
       this._invites = invites;
@@ -75,6 +80,21 @@ export const useFamilyStore = defineStore("FamilyStore", {
         );
         if (response.data) {
           this.setFamilies(response.data);
+          this.setLoading(false);
+          const a = {};
+        }
+      } catch (error) {
+        this.setLoading(false);
+      }
+    },
+    async fetchFamilyById(familyId: string) {
+      try {
+        const config = useRuntimeConfig();
+        const response = await axios.get(
+          config.public.BASE_URL + "/api/family/" + familyId
+        );
+        if (response.data) {
+          this.setActiveFamily(response.data);
           this.setLoading(false);
         }
       } catch (error) {

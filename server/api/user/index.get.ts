@@ -24,6 +24,11 @@ export default defineEventHandler(async (event) => {
   const dbUser = await UserModel.findOne({
     providerId: authUser.id,
   });
+  if (!dbUser) {
+    const { insertedId } = await UserModel.collection.insertOne(user);
+
+    user.id = insertedId.toString();
+  }
   if (dbUser) {
     if (dbUser._id) {
       user.id = dbUser._id.toString();
