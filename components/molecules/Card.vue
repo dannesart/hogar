@@ -1,10 +1,18 @@
 <template>
-  <article class="bg-gray-50 p-5 rounded-xl">
+  <article class="bg-gray-50 p-5 rounded-xl flex-1">
     <header
       v-if="icon || title"
-      class="flex gap-6 items-center justify-between"
+      class="flex gap-6 items-center"
+      :class="{
+        'justify-between': variant === 'horizontal',
+        'justify-center': variant === 'vertical',
+      }"
     >
-      <NuxtLink :to="link" class="flex gap-6 items-center">
+      <NuxtLink
+        :to="link"
+        class="flex gap-6 items-center"
+        :class="{ 'flex-col': variant === 'vertical' }"
+      >
         <div
           v-if="icon"
           class="w-16 h-16 flex-none rounded-full bg-rose-50 flex justify-center items-center"
@@ -41,6 +49,7 @@ type Props = {
   editable?: boolean;
   actions?: Action[];
   link?: string;
+  variant?: "horizontal" | "vertical";
 };
 const {
   title,
@@ -48,6 +57,7 @@ const {
   editable = false,
   actions = [],
   link,
+  variant = "horizontal",
 } = defineProps<Props>();
 
 const emits = defineEmits(["edit", "action"]);

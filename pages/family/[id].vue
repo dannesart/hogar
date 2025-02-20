@@ -23,7 +23,19 @@
           ]"
         ></MoleculesCard>
       </div>
-      <AtomsButton @click="handleLeave" :loading="leaving"> Leave </AtomsButton>
+      <div class="flex flex-col md:flex-row gap-6">
+        <AtomsButton @click="handleLeave" :loading="leaving">
+          Leave
+        </AtomsButton>
+        <AtomsButton
+          @click="handleDelete"
+          v-if="family.createdBy === user.id"
+          :variant="'transparent'"
+          :loading="deleting"
+        >
+          Delete
+        </AtomsButton>
+      </div>
     </section>
   </NuxtLayout>
 </template>
@@ -47,8 +59,17 @@ const router = useRouter();
 if (id && typeof id === "string") fetchFamilyById(id);
 
 const leaving = ref(false);
+const deleting = ref(false);
 
 const handleLeave = async () => {
+  leaving.value = true;
+
+  await leaveFamily(id as string);
+  router.push("/family");
+  leaving.value = false;
+};
+
+const handleDelete = async () => {
   leaving.value = true;
 
   await leaveFamily(id as string);

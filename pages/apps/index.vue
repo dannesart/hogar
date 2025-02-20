@@ -3,9 +3,13 @@
     <template v-slot:header>
       <AtomsHeadline :size="3">Apps</AtomsHeadline>
     </template>
-    <div class="flex flex-col md:flex-row gap-6">
+    <div class="grid gap-6 grid-cols-2">
       <NuxtLink v-for="app in apps" :to="'/apps/' + app.id">
-        <MoleculesCard :title="app.label" :icon="app.icon"></MoleculesCard>
+        <MoleculesCard
+          :title="app.label"
+          :variant="'vertical'"
+          :icon="app.icon"
+        ></MoleculesCard>
       </NuxtLink>
     </div>
   </NuxtLayout>
@@ -22,6 +26,11 @@ const apps = [
     id: "todo",
     icon: "lucide:list-todo",
     label: "Todo",
+  },
+  {
+    id: "economay",
+    icon: "lucide:dollar-sign",
+    label: "Economy",
   },
 ];
 </script>
