@@ -158,6 +158,7 @@
         @action="toggleCreateFamiliy"
         :variant="'add'"
         :float="true"
+        :standalone="true"
       ></MoleculesAction>
       <!-- Confirms -->
       <MoleculesConfirm

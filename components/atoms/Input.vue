@@ -6,7 +6,7 @@
       :max="max"
       :disabled="disabled"
       placeholder=""
-      :value="value"
+      :value="valueRef"
       :autofocus="autofocus"
       :id="id"
       @input="updateValue($event)"
@@ -62,6 +62,7 @@ const {
   value,
 } = defineProps<Props>();
 const isDirty = ref(false);
+const valueRef = ref(value);
 
 const validator = (value: string | number | undefined) => {
   let schema;
@@ -92,14 +93,15 @@ const validator = (value: string | number | undefined) => {
 
 const notValid = computed(() => {
   if (!isDirty.value) return false;
-  const valid = validator(value).success;
-  return !valid;
+  const valid = validator(valueRef.value);
+  return !valid.success;
 });
 
 const emits = defineEmits(["update"]);
 const updateValue = (event: Event) => {
   isDirty.value = true;
   const newValue = (event.target as { value?: string }).value;
+  valueRef.value = newValue;
   emits("update", newValue);
 };
 </script>

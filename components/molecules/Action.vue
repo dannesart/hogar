@@ -7,9 +7,9 @@
   >
     <Icon :name="icon" :size="30" />
   </button>
-  <AtomsModal v-if="variant === 'more' && showModal" @close="toggleModal">
+  <AtomsModal v-if="showModal && !standalone" @close="toggleModal">
     <template v-slot:header>
-      <AtomsHeadline :size="2"> More </AtomsHeadline>
+      <AtomsHeadline v-if="title" :size="2"> {{ title }} </AtomsHeadline>
     </template>
     <div class="flex flex-col gap-5">
       <template v-for="action in actions">
@@ -21,6 +21,7 @@
           {{ action.label }}
         </AtomsButton>
       </template>
+      <slot />
     </div>
   </AtomsModal>
 </template>
@@ -34,6 +35,8 @@ type Props = {
   actions?: Action[];
   size?: "default" | "small";
   float?: boolean;
+  title?: string;
+  standalone?: boolean;
 };
 
 const {
@@ -41,6 +44,8 @@ const {
   style = "default",
   size = "default",
   float = false,
+  title = "",
+  standalone = false,
 } = defineProps<Props>();
 const emits = defineEmits(["action"]);
 const showModal = ref(false);

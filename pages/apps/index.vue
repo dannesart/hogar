@@ -6,7 +6,8 @@
     <div class="grid gap-6 grid-cols-2">
       <NuxtLink v-for="app in apps" :to="'/apps/' + app.id">
         <MoleculesCard
-          :title="app.label"
+          v-wave
+          :title="app.name"
           :variant="'vertical'"
           :icon="app.icon"
         ></MoleculesCard>
@@ -16,23 +17,8 @@
 </template>
 
 <script setup lang="ts">
-const apps = [
-  {
-    id: "budget",
-    icon: "lucide:chart-no-axes-combined",
-    label: "Budget",
-  },
-  {
-    id: "todo",
-    icon: "lucide:list-todo",
-    label: "Todo",
-  },
-  {
-    id: "economay",
-    icon: "lucide:dollar-sign",
-    label: "Economy",
-  },
-];
+const appsStore = useAppsStore();
+const { apps } = storeToRefs(appsStore);
 </script>
 
 <script lang="ts">

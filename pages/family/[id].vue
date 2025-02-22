@@ -29,7 +29,7 @@
         </AtomsButton>
         <AtomsButton
           @click="handleDelete"
-          v-if="family.createdBy === user.id"
+          v-if="family?.createdBy === user.id"
           :variant="'transparent'"
           :loading="deleting"
         >

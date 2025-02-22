@@ -3,7 +3,15 @@
     <template v-slot:header>
       <AtomsHeadline :size="3">{{ id }}</AtomsHeadline>
     </template>
-    <div>Welcome to {{ id }} app</div>
+    <div>
+      <template v-if="app?.components">
+        <AppsResolver
+          v-for="component in app.components"
+          :component="component.name"
+          :props="component.props"
+        />
+      </template>
+    </div>
   </NuxtLayout>
 </template>
 <script setup lang="ts">
@@ -12,4 +20,7 @@ definePageMeta({
 });
 
 const { id } = useRoute().params;
+const appStore = useAppsStore();
+const { appById } = appStore;
+const app = appById(id as string);
 </script>
