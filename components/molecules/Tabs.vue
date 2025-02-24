@@ -11,9 +11,11 @@
     </div>
   </div>
 
-  <div v-for="tab in tabs" class="py-6">
-    <slot :name="tab" v-if="activeTab === tab" />
-  </div>
+  <template v-for="tab in tabs">
+    <div class="py-6" v-if="activeTab === tab">
+      <slot :name="tab" />
+    </div>
+  </template>
 </template>
 
 <script setup lang="ts">

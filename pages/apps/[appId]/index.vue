@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
     <template v-slot:header>
-      <AtomsHeadline :size="3">{{ id }}</AtomsHeadline>
+      <AtomsHeadline :size="3">{{ appId }}</AtomsHeadline>
     </template>
     <div>
       <template v-if="app?.components">
@@ -19,8 +19,8 @@ definePageMeta({
   middleware: "auth",
 });
 
-const { id } = useRoute().params;
+const { appId } = useRoute().params;
 const appStore = useAppsStore();
 const { appById } = appStore;
-const app = appById(id as string);
+const app = appById(appId as string);
 </script>

@@ -91,6 +91,9 @@
               >
             </div>
           </div>
+          <AtomsEmpty v-if="!invites.length">
+            <AtomsHeadline :size="5"> No invites yet. </AtomsHeadline>
+          </AtomsEmpty>
         </template>
       </MoleculesTabs>
       <!-- Modals -->

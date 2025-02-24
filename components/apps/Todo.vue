@@ -4,9 +4,41 @@
       {{ title }}
     </AtomsHeadline>
     <template v-for="(value, key) in state">
-      <MoleculesCard :title="key as string"></MoleculesCard>
+      <MoleculesCard
+        :title="key as string"
+        :link="'/apps/todo/' + key"
+        :icon="'lucide:list-todo'"
+        :editable="true"
+        :actions="[
+          {
+            label: 'Invite',
+            actionId: 'invite',
+            disabled: false,
+          },
+          {
+            label: 'Members',
+            actionId: 'members',
+            variant: 'secondary',
+            disabled: false,
+          },
+          {
+            label: 'Delete',
+            actionId: 'delete',
+            variant: 'transparent',
+            disabled: false,
+          },
+          {
+            label: 'Leave',
+            actionId: 'leave',
+            variant: 'transparent',
+            disabled: false,
+          },
+        ]"
+      >
+        Todos: {{ value.todos.length }}
+      </MoleculesCard>
     </template>
-    <AtomsEmpty v-if="!state">
+    <AtomsEmpty v-if="!amountOfLists">
       <AtomsHeadline :size="5"> No todo's yet. </AtomsHeadline>
     </AtomsEmpty>
     <MoleculesAction
@@ -19,11 +51,10 @@
       <template v-slot:header>
         <AtomsHeadline :size="2">New todo-list</AtomsHeadline>
       </template>
-      <div class="flex gap-4">
+      <div class="flex flex-col gap-4">
         <AtomsInput
           :label="'Name'"
           :icon="'lucide:letter-text'"
-          :class="'flex-1'"
           :required="true"
           :value="valueRef"
           @update="handleUpdate"
@@ -46,6 +77,7 @@ const appsStore = useAppsStore();
 const { setState } = appsStore;
 const { stateByApp } = storeToRefs(appsStore);
 const state = computed(() => stateByApp.value(appId));
+const amountOfLists = computed(() => Object.keys(state.value).length);
 
 const valueRef = ref();
 const showCreateTodoList = ref(false);

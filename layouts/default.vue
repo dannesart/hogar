@@ -1,12 +1,14 @@
 <template>
   <div class="flex flex-col h-svh">
     <header class="py-5 px-5 md:px-10 flex gap-4 items-center">
-      <Icon
-        name="lucide:arrow-left"
-        :size="30"
+      <button
+        class="rounded-full flex justify-center items-center cursor-pointer"
+        v-wave
         v-if="isChild"
         @click.prevent="$router.back()"
-      />
+      >
+        <Icon name="lucide:arrow-left" :size="30" />
+      </button>
       <div class="flex-1 overflow-hidden text-ellipsis">
         <slot name="header" />
       </div>
