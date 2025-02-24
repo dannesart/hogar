@@ -19,7 +19,7 @@
       <slot />
     </main>
     <nav
-      class="sticky bottom-0 px-5 md:px-10 py-5 bg-white flex justify-between md:shadow-md md:rounded-full md:max-w-max md:min-w-96 md:bottom-10 md:self-center"
+      class="sticky bottom-0 px-5 md:px-10 py-5 bg-inherit flex justify-between md:shadow-md md:rounded-full md:max-w-max md:min-w-96 md:bottom-10 md:self-center"
     >
       <NuxtLink
         v-for="nav in navs"

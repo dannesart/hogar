@@ -8,6 +8,7 @@ const FamilySchema = z
     created: z.date(),
     updatedBy: z.string(),
     updated: z.date(),
+    description: z.string().optional(),
     members: z.array(z.string()),
     invites: z.array(z.string()),
   })

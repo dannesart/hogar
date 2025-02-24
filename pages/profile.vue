@@ -1,11 +1,11 @@
 <template>
-  <NuxtLayout>
+  <NuxtLayout :class="'bg-rose-50'">
     <template v-slot:header>
       <AtomsHeadline :size="3">Profile</AtomsHeadline>
     </template>
     <section class="grid gap-10">
       <div
-        class="bg-rose-50 p-4 md:p-10 rounded-2xl flex justify-center relative mb-10"
+        class="bg-rose-100 p-4 md:p-10 rounded-2xl flex justify-center relative mb-10"
       >
         <ClientOnly>
           <img
@@ -26,6 +26,7 @@
             :label="'Email'"
             :required="true"
             :disabled="true"
+            :variant="'white'"
           ></AtomsInput>
 
           <div class="flex gap-6">
@@ -38,7 +39,7 @@
               :required="true"
               :disabled="false"
               :class="'flex-1'"
-              s
+              :variant="'white'"
               @update="($event) => (baseDisplayName = $event)"
             ></AtomsInput>
             <AtomsButton

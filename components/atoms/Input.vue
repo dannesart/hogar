@@ -13,7 +13,8 @@
       class="h-[72px] rounded-xl text-2xl w-full peer"
       :class="{
         'bg-rose-100': notValid,
-        'bg-gray-100 outline-gray-300': !notValid,
+        'bg-gray-100 outline-gray-300': !notValid && variant === 'gray',
+        'bg-white outline-gray-300': !notValid && variant === 'white',
         'pl-16': !!icon,
         'pt-4': !!label,
       }"
@@ -49,6 +50,7 @@ type Props = {
   value?: string | number;
   autofocus?: boolean;
   id?: string;
+  variant?: "white" | "gray";
 };
 const {
   type = "text",
@@ -60,6 +62,7 @@ const {
   min = 0,
   max = 500,
   value,
+  variant = "gray",
 } = defineProps<Props>();
 const isDirty = ref(false);
 const valueRef = ref(value);

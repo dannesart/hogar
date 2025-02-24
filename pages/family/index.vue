@@ -47,6 +47,12 @@
                   disabled: false,
                 },
                 {
+                  label: 'Details',
+                  actionId: 'details',
+                  variant: 'secondary',
+                  disabled: false,
+                },
+                {
                   label: 'Delete',
                   actionId: 'delete',
                   variant: 'transparent',

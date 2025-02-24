@@ -7,6 +7,7 @@ const FamilyDbSchema: Schema<Family> = new Schema({
   createdBy: String,
   created: { type: Date, default: Date.now },
   updatedBy: String,
+  description: String,
   updated: { type: Date, default: Date.now },
   members: [{ type: Schema.Types.ObjectId, ref: UserModel }],
   invites: [String],

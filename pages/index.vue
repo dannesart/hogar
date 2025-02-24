@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout>
+  <NuxtLayout :class="'bg-gray-50'">
     <template v-slot:header>
       <AtomsHeadline :size="3">Hogar</AtomsHeadline>
     </template>

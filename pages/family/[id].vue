@@ -5,6 +5,14 @@
     </template>
     <section class="flex flex-col gap-6">
       <div class="flex flex-col gap-3">
+        <AtomsHeadline :size="4">Description</AtomsHeadline>
+        <div class="flex justify-between">
+          <p>
+            {{ family?.description || "No description yet." }}
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
         <AtomsHeadline :size="4">Members</AtomsHeadline>
         <MoleculesCard
           v-for="member in family?.members"
@@ -23,19 +31,27 @@
           ]"
         ></MoleculesCard>
       </div>
-      <div class="flex flex-col md:flex-row gap-6">
-        <AtomsButton @click="handleLeave" :loading="leaving">
-          Leave
-        </AtomsButton>
-        <AtomsButton
-          @click="handleDelete"
-          v-if="family?.createdBy === user.id"
-          :variant="'transparent'"
-          :loading="deleting"
-        >
-          Delete
-        </AtomsButton>
-      </div>
+
+      <MoleculesAction
+        :float="true"
+        :actions="[
+          {
+            label: 'Edit',
+            actionId: 'edit',
+          },
+          {
+            label: 'Leave',
+            variant: 'transparent',
+            actionId: 'leave',
+          },
+          {
+            label: 'Delete',
+            variant: 'transparent',
+            actionId: 'delete',
+          },
+        ]"
+        :title="'More'"
+      ></MoleculesAction>
     </section>
   </NuxtLayout>
 </template>
