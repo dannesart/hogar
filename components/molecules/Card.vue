@@ -1,6 +1,6 @@
 <template>
   <article
-    class="bg-gray-50 p-5 rounded-xl flex-1 items-center"
+    class="bg-white p-5 rounded-xl flex-1 items-center"
     :class="{
       'grid grid-cols-[64px_1fr_64px] grid-rows-[1fr_auto] gap-x-5':
         variant === 'horizontal',

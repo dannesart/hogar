@@ -14,7 +14,8 @@
       :class="{
         'bg-rose-100': notValid,
         'bg-gray-100 outline-gray-300': !notValid && variant === 'gray',
-        'bg-white outline-gray-300': !notValid && variant === 'white',
+        'bg-white outline-gray-300 border-2 border-gray-100':
+          !notValid && variant === 'white',
         'pl-16': !!icon,
         'pt-4': !!label,
       }"

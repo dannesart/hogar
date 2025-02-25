@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :class="'bg-rose-50'">
+  <NuxtLayout>
     <template v-slot:header>
       <AtomsHeadline :size="3">Profile</AtomsHeadline>
     </template>
