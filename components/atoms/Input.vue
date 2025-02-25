@@ -4,17 +4,18 @@
       :type="type"
       :required="required"
       :max="max"
-      :disabled="disabled"
+      :disabled="disabled || loading"
       placeholder=""
       :value="valueRef"
       :autofocus="autofocus"
       :id="id"
       @input="updateValue($event)"
+      @blur="handleBlur"
       class="h-[72px] rounded-xl text-2xl w-full peer"
       :class="{
         'bg-rose-100': notValid,
         'bg-gray-100 outline-gray-300': !notValid && variant === 'gray',
-        'bg-white outline-gray-300 border-2 border-gray-100':
+        'bg-white disabled:bg-gray-100 outline-gray-300 border-2 border-gray-100':
           !notValid && variant === 'white',
         'pl-16': !!icon,
         'pt-4': !!label,
@@ -34,6 +35,12 @@
     >
       <Icon :name="'meteor-icons:lock'" size="15" />
     </div>
+    <Icon
+      v-if="loading"
+      :name="'svg-spinners:3-dots-bounce'"
+      :class="'absolute right-5 top-5'"
+      :size="30"
+    />
   </div>
 </template>
 
@@ -52,6 +59,7 @@ type Props = {
   autofocus?: boolean;
   id?: string;
   variant?: "white" | "gray";
+  loading?: boolean;
 };
 const {
   type = "text",
@@ -64,6 +72,7 @@ const {
   max = 500,
   value,
   variant = "gray",
+  loading = false,
 } = defineProps<Props>();
 const isDirty = ref(false);
 const valueRef = ref(value);
@@ -101,11 +110,14 @@ const notValid = computed(() => {
   return !valid.success;
 });
 
-const emits = defineEmits(["update"]);
+const emits = defineEmits(["update", "blur"]);
 const updateValue = (event: Event) => {
   isDirty.value = true;
   const newValue = (event.target as { value?: string }).value;
   valueRef.value = newValue;
   emits("update", newValue);
+};
+const handleBlur = () => {
+  emits("blur", valueRef.value);
 };
 </script>

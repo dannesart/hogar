@@ -8,6 +8,8 @@ type State = {
       [stateId: string]: any;
     };
   };
+  _favourites: App[];
+  _shortCuts: { label: string; route: string; id: string }[];
 };
 
 export const useAppsStore = defineStore("AppsStore", {
@@ -57,6 +59,12 @@ export const useAppsStore = defineStore("AppsStore", {
         return state._appState?.[appId]?.[stateId] || {};
       };
     },
+    favourites: (state) => {
+      return state._favourites;
+    },
+    shortCuts: (state) => {
+      return state._shortCuts;
+    },
   },
   actions: {
     setState(appId: string, stateId: string, patchState: any) {
@@ -70,6 +78,25 @@ export const useAppsStore = defineStore("AppsStore", {
       if (!this._appState[appId]) this._appState[appId] = {};
       const currentState = this._appState[appId];
       this._appState[appId] = { ...currentState, ...patch };
+    },
+
+    setFavourite(appId: string) {
+      const app = this.appById(appId);
+      if (app) this._favourites.push(app);
+    },
+    removeFavourite(appId: string) {
+      const idx = this._favourites.findIndex(
+        (favourite) => favourite.id === appId
+      );
+      if (idx > -1) this._favourites.slice(idx, 1);
+    },
+    setShortCut(label: string, route: string) {
+      const id = crypto.randomUUID();
+      this._shortCuts.push({ label, route, id });
+    },
+    removeShortCut(id: string) {
+      const idx = this._shortCuts.findIndex((shortCut) => shortCut.id === id);
+      if (idx > -1) this._shortCuts.slice(idx, 1);
     },
 
     async getStatesByApp(appId: string) {},

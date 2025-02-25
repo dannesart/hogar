@@ -2,7 +2,7 @@
   <button
     class="font-bold text-xl px-6 py-4 rounded-xl flex gap-3 justify-center items-center"
     v-wave
-    :class="variantClass()"
+    :class="variantClass"
   >
     <slot v-if="!loading" />
     <Icon v-if="loading" :name="'svg-spinners:3-dots-bounce'" :size="30" />
@@ -16,9 +16,9 @@ type Props = {
 };
 const { variant = "primary", loading = false } = defineProps<Props>();
 
-const variantClass = () => {
+const variantClass = computed(() => {
   return variant.toLowerCase();
-};
+});
 </script>
 
 <style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col h-svh bg-gray-50">
-    <header class="py-5 px-5 md:px-10 flex gap-4 items-center">
+  <div class="flex flex-col min-h-svh bg-gray-50">
+    <header class="py-5 px-5 md:px-10 flex gap-4 items-center md:sticky top-0">
       <button
         class="rounded-full flex justify-center items-center cursor-pointer"
         v-wave
@@ -14,7 +14,7 @@
       </div>
     </header>
     <main
-      class="px-5 md:px-10 flex-1 max-w-screen-xl w-full self-center relative"
+      class="px-5 md:px-10 md:pb-32 flex-1 max-w-screen-xl w-full self-center relative"
     >
       <slot />
     </main>

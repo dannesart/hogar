@@ -7,7 +7,7 @@
       <MoleculesCard
         :title="key as string"
         :link="'/apps/todo/' + key"
-        :icon="'lucide:list-todo'"
+        :icon="icon"
         :editable="true"
         :actions="[
           {
@@ -70,6 +70,7 @@ type Props = {
   title?: string;
 };
 const appId = "Todo";
+const icon = "lucide:list-todo";
 
 const { title = "todos" } = defineProps<Props>();
 

@@ -22,14 +22,16 @@
               ? 'lucide:user-round-check'
               : 'lucide:user-round'
           "
+          :editable="family?.createdBy === user.id && user.id !== (member as unknown as User)._id"
           :actions="[
             {
               label: 'Remove',
               actionId: 'remove',
               disabled: family?.createdBy !== user.id || user.id === (member as unknown as User)._id,
-            }
+            },
           ]"
-        ></MoleculesCard>
+        >
+        </MoleculesCard>
       </div>
 
       <MoleculesAction
@@ -38,16 +40,19 @@
           {
             label: 'Edit',
             actionId: 'edit',
+            disabled: family?.createdBy !== user.id,
           },
           {
             label: 'Leave',
             variant: 'transparent',
             actionId: 'leave',
+            disabled: family?.createdBy === user.id,
           },
           {
             label: 'Delete',
             variant: 'transparent',
             actionId: 'delete',
+            disabled: family?.createdBy !== user.id,
           },
         ]"
         :title="'More'"

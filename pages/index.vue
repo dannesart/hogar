@@ -8,6 +8,15 @@
         Welcome,
         <span class="text-rose-300"> {{ user.displayName }}.</span>
       </AtomsHeadline>
+
+      <div>
+        <AtomsHeadline :size="4"> Shortcuts </AtomsHeadline>
+        <MoleculesCard
+          :title="'Todo'"
+          :icon="'lucide:list-todo'"
+          :variant="'vertical'"
+        ></MoleculesCard>
+      </div>
     </div>
   </NuxtLayout>
 </template>

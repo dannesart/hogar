@@ -17,7 +17,7 @@
 
       <article class="grid gap-3">
         <AtomsHeadline :size="4"> Base </AtomsHeadline>
-        <div class="grid gap-6">
+        <AtomsContainer>
           <AtomsInput
             :type="'email'"
             :value="user?.email"
@@ -38,24 +38,31 @@
               :label="'Display name'"
               :required="true"
               :disabled="false"
+              :loading="isSaving"
               :class="'flex-1'"
               :variant="'white'"
               @update="($event) => (baseDisplayName = $event)"
+              @blur="saveBaseInformation"
             ></AtomsInput>
-            <AtomsButton
-              :variant="hasChanges ? 'secondary' : 'transparent'"
-              :loading="isSaving"
-              @click="saveBaseInformation"
-            >
-              <Icon name="lucide:save" :size="30" />
-            </AtomsButton>
           </div>
-        </div>
+        </AtomsContainer>
+      </article>
+
+      <article class="grid gap-3">
+        <AtomsHeadline :size="4"> Settings </AtomsHeadline>
+        <AtomsContainer>
+          <div class="flex justify-between items-center gap-6">
+            <AtomsLabel> Allow apps to access your data </AtomsLabel>
+            <AtomsToggle :toggled="false" @toggle="" />
+          </div>
+        </AtomsContainer>
       </article>
 
       <article class="grid gap-3">
         <AtomsHeadline :size="4"> Other </AtomsHeadline>
-        <AtomsButton @click="handleLogout"> Log me out, please. </AtomsButton>
+        <AtomsContainer>
+          <AtomsButton @click="handleLogout"> Log me out, please. </AtomsButton>
+        </AtomsContainer>
       </article>
     </section>
   </NuxtLayout>
