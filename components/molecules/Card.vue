@@ -18,15 +18,18 @@
         {{ title }}
       </AtomsHeadline>
     </NuxtLink>
+    <div>
+      <MoleculesAction
+        :variant="'more'"
+        :style="'transparent'"
+        :size="'small'"
+        @action="handleAction"
+        :actions="actions"
+        v-if="editable"
+      ></MoleculesAction>
 
-    <MoleculesAction
-      :variant="'more'"
-      :style="'transparent'"
-      :size="'small'"
-      @action="handleAction"
-      :actions="actions"
-      v-if="editable"
-    ></MoleculesAction>
+      <slot name="corner" />
+    </div>
     <div
       v-if="$slots.default"
       class="col-span-2 col-start-2 text-lg font-semibold text-gray-500"

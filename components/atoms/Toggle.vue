@@ -13,9 +13,10 @@
       class="rounded-full left-1 bg-blue-950 absolute transition-all"
       :class="{
         'translate-x-full  bg-rose-50': toggledRef,
-        'h-6 w-6 top-1 left-2': size === 'small',
+        'h-6 w-6 top-0.5 left-1': size === 'small',
         'w-12 h-12 top-1.5': size === 'default',
         'left-5': size === 'default' && toggledRef,
+        'left-2': size === 'small' && toggledRef,
       }"
     ></div>
   </div>
