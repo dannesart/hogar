@@ -1,12 +1,11 @@
 <template>
   <div class="p-10 flex flex-col justify-between h-svh bg-rose-50 relative">
-    <div class="flex justify-between">
-      <AtomsHeadline :size="3"> Hogar </AtomsHeadline>
-    </div>
+    <div class="flex justify-between"></div>
 
     <div
       class="flex flex-col gap-1 md:self-center md:w-full md:max-w-screen-sm font-figtree"
     >
+      <AtomsHeadline :size="3" :variant="'light'"> Hogar </AtomsHeadline>
       <AtomsHeadline :size="1"> Let's move in together! </AtomsHeadline>
     </div>
 

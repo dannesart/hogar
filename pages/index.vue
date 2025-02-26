@@ -1,12 +1,13 @@
 <template>
   <NuxtLayout :class="'bg-gray-50'">
     <template v-slot:header>
-      <AtomsHeadline :size="3">Hogar</AtomsHeadline>
+      <!-- <AtomsHeadline :size="3">Hogar</AtomsHeadline> -->
     </template>
     <div v-if="user" class="grid gap-8">
       <AtomsHeadline :size="1">
-        Welcome,
-        <span class="text-rose-300"> {{ user.displayName }}.</span>
+        Welcome
+        <span class="text-rose-300"> home</span><br />
+        {{ user.displayName }}
       </AtomsHeadline>
 
       <div class="grid gap-6">

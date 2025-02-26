@@ -23,7 +23,7 @@
 
   <h3
     v-if="size === 3"
-    class="text-3xl font-extrabold font-figtree"
+    class="text-3xl font-extrabold font-bebas"
     :class="{
       'text-blue-950': variant === 'dark',
       'text-rose-300': variant === 'light',
@@ -33,7 +33,7 @@
   </h3>
   <h4
     v-if="size === 4"
-    class="text-2xl font-bold font-figtree"
+    class="text-2xl font-bold font-MPLUS overflow-hidden text-ellipsis whitespace-nowrap"
     :class="{
       'text-blue-950': variant === 'dark',
       'text-rose-300': variant === 'light',

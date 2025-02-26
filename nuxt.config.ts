@@ -42,6 +42,7 @@ export default defineNuxtConfig({
             MPLUS: ["'M PLUS Rounded 1c'"],
             patua: ["Patua One"],
             figtree: ["Figtree"],
+            bebas: ["Bebas Neue"],
           },
         },
       },
