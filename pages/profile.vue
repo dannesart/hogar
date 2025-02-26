@@ -53,11 +53,11 @@
         <AtomsContainer>
           <div class="flex justify-between items-center gap-6">
             <AtomsLabel> Dark mode </AtomsLabel>
-            <AtomsToggle :toggled="false" @toggle="" />
+            <AtomsToggle :size="'small'" :toggled="false" @toggle="" />
           </div>
           <div class="flex justify-between items-center gap-6">
             <AtomsLabel> Allow apps to access your data </AtomsLabel>
-            <AtomsToggle :toggled="false" @toggle="" />
+            <AtomsToggle :size="'small'" :toggled="false" @toggle="" />
           </div>
         </AtomsContainer>
       </article>

@@ -19,6 +19,14 @@
             :link="value.route"
             v-for="(value, key) in shortCuts"
           >
+            <template v-slot:corner>
+              <Icon
+                :name="'lucide:star-off'"
+                :size="30"
+                @click="toggleShortCut(value.route)"
+                :class="'cursor-pointer'"
+              />
+            </template>
           </MoleculesCard>
         </div>
       </div>
@@ -31,7 +39,13 @@ import { storeToRefs } from "pinia";
 import { useUserStore } from "~~/stores/user";
 
 const { user } = storeToRefs(useUserStore());
-const { shortCuts } = storeToRefs(useAppsStore());
+const appsStore = useAppsStore();
+const { removeShortCut } = appsStore;
+const { shortCuts } = storeToRefs(appsStore);
+
+const toggleShortCut = (route: string) => {
+  removeShortCut(route);
+};
 </script>
 
 <script lang="ts">

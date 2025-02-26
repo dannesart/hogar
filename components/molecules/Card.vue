@@ -1,6 +1,6 @@
 <template>
   <article
-    class="bg-white p-5 rounded-xl flex-1 items-center"
+    class="bg-white p-5 rounded-xl flex-1 items-center relative"
     :class="{
       'grid grid-cols-[64px_1fr_64px] grid-rows-[1fr_auto] gap-x-5':
         variant === 'horizontal',
@@ -24,7 +24,12 @@
         {{ title }}
       </AtomsHeadline>
     </NuxtLink>
-    <div v-if="$slots.corner || editable">
+    <div
+      v-if="$slots.corner || editable"
+      :class="{
+        'absolute right-5 top-5': variant === 'vertical',
+      }"
+    >
       <MoleculesAction
         :variant="'more'"
         :style="'transparent'"

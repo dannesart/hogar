@@ -7,6 +7,7 @@
         :name="!!shortCut ? 'lucide:star-off' : 'lucide:star'"
         :size="30"
         @click="toggleShortCut"
+        :class="'cursor-pointer'"
       />
     </template>
     <div>
