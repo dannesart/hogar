@@ -5,7 +5,7 @@
     </template>
     <section class="flex flex-col gap-6">
       <div class="flex flex-col gap-3">
-        <AtomsHeadline :size="4">Description</AtomsHeadline>
+        <AtomsHeadline :size="4" :underline="true">Description</AtomsHeadline>
         <div class="flex justify-between">
           <p>
             {{ family?.description || "No description yet." }}
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="flex flex-col gap-3">
-        <AtomsHeadline :size="4">Members</AtomsHeadline>
+        <AtomsHeadline :size="4" :underline="true">Members</AtomsHeadline>
         <MoleculesCard
           v-for="member in family?.members"
           :title="(member as unknown as User).displayName"

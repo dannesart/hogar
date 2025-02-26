@@ -11,7 +11,7 @@
       :id="id"
       @input="updateValue($event)"
       @blur="handleBlur"
-      class="h-[72px] rounded-xl text-2xl w-full peer"
+      class="h-[72px] rounded-xl text-2xl w-full peer pr-4"
       :class="{
         'bg-rose-100': notValid,
         'bg-gray-100 outline-gray-300': !notValid && variant === 'gray',
@@ -33,7 +33,7 @@
       v-if="disabled"
       class="absolute -right-2 -top-2 w-8 h-8 flex items-center justify-center bg-blue-950 text-white rounded-full"
     >
-      <Icon :name="'meteor-icons:lock'" size="15" />
+      <Icon :name="'lucide:lock'" size="15" />
     </div>
     <Icon
       v-if="loading"

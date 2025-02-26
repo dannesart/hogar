@@ -11,8 +11,8 @@
       </AtomsHeadline>
 
       <div class="grid gap-6">
-        <AtomsHeadline :size="4"> Shortcuts </AtomsHeadline>
-        <div class="grid gap-6 grid-cols-2">
+        <AtomsHeadline :size="4" :underline="true"> Shortcuts </AtomsHeadline>
+        <div class="grid gap-6 grid-cols-2" v-if="amountOfShortCuts">
           <MoleculesCard
             :title="value.label"
             :icon="'lucide:list-todo'"
@@ -30,6 +30,9 @@
             </template>
           </MoleculesCard>
         </div>
+        <AtomsEmpty v-else>
+          <AtomsHeadline :size="5"> No shortcuts yet. </AtomsHeadline>
+        </AtomsEmpty>
       </div>
     </div>
   </NuxtLayout>
@@ -43,6 +46,8 @@ const { user } = storeToRefs(useUserStore());
 const appsStore = useAppsStore();
 const { removeShortCut } = appsStore;
 const { shortCuts } = storeToRefs(appsStore);
+
+const amountOfShortCuts = computed(() => Object.keys(shortCuts.value).length);
 
 const toggleShortCut = (route: string) => {
   removeShortCut(route);

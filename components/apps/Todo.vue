@@ -2,7 +2,7 @@
   <section class="flex flex-col gap-6">
     <template v-if="id">
       <div class="flex justify-between">
-        <AtomsHeadline :size="4"> {{ id }} </AtomsHeadline>
+        <AtomsHeadline :size="4" :underline="true"> {{ id }} </AtomsHeadline>
         <AtomsToggle
           :toggled="showCompleted"
           @toggle="showCompleted = !showCompleted"
@@ -46,13 +46,16 @@
             :required="true"
             :value="valueRef"
             @update="handleUpdate"
+            @keydown.enter="saveTodo"
           />
-          <AtomsButton @click="saveTodo">Add</AtomsButton>
+          <AtomsButton @click="saveTodo" :loading="savingNewTodo"
+            >Add</AtomsButton
+          >
         </div>
       </AtomsModal>
     </template>
     <template v-else>
-      <AtomsHeadline :size="4"> {{ title }} </AtomsHeadline>
+      <AtomsHeadline :size="4" :underline="true"> {{ title }} </AtomsHeadline>
 
       <template v-for="(value, key) in appState">
         <MoleculesCard
@@ -146,12 +149,15 @@ const valueRef = ref();
 const showCreateTodoList = ref(false);
 const showCreateTodo = ref(false);
 const showCompleted = ref(true);
+const savingNewTodo = ref(false);
 const handleUpdate = (value: string) => (valueRef.value = value);
 const saveTodoList = () => {
+  savingNewTodo.value = true;
   setState(appId, valueRef.value, {
     todos: [],
   });
   toggleCreateTodoList();
+  savingNewTodo.value = false;
 };
 const saveTodo = () => {
   setState(appId, id as string, {

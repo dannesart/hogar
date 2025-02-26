@@ -8,6 +8,14 @@
     }"
   >
     <slot />
+    <div
+      v-if="underline"
+      class="h-2 w-8"
+      :class="{
+        'bg-blue-950': variant === 'dark',
+        'bg-rose-300': variant === 'light',
+      }"
+    ></div>
   </h1>
 
   <h2
@@ -19,6 +27,14 @@
     }"
   >
     <slot />
+    <div
+      v-if="underline"
+      class="h-2 w-8"
+      :class="{
+        'bg-blue-950': variant === 'dark',
+        'bg-rose-300': variant === 'light',
+      }"
+    ></div>
   </h2>
 
   <h3
@@ -30,16 +46,32 @@
     }"
   >
     <slot />
+    <div
+      v-if="underline"
+      class="h-2 w-8"
+      :class="{
+        'bg-blue-950': variant === 'dark',
+        'bg-rose-300': variant === 'light',
+      }"
+    ></div>
   </h3>
   <h4
     v-if="size === 4"
-    class="text-2xl font-bold font-MPLUS overflow-hidden text-ellipsis whitespace-nowrap"
+    class="text-2xl font-bold font-figtree overflow-hidden text-ellipsis whitespace-nowrap"
     :class="{
       'text-blue-950': variant === 'dark',
       'text-rose-300': variant === 'light',
     }"
   >
     <slot />
+    <div
+      v-if="underline"
+      class="h-1 w-10"
+      :class="{
+        'bg-blue-950': variant === 'dark',
+        'bg-rose-300': variant === 'light',
+      }"
+    ></div>
   </h4>
   <h5
     v-if="size === 5"
@@ -50,6 +82,14 @@
     }"
   >
     <slot />
+    <div
+      v-if="underline"
+      class="h-2 w-8"
+      :class="{
+        'bg-blue-950': variant === 'dark',
+        'bg-rose-300': variant === 'light',
+      }"
+    ></div>
   </h5>
 </template>
 
@@ -57,6 +97,7 @@
 type Props = {
   size: number;
   variant?: "dark" | "light";
+  underline?: boolean;
 };
-const { size, variant = "dark" } = defineProps<Props>();
+const { size, variant = "dark", underline = false } = defineProps<Props>();
 </script>
