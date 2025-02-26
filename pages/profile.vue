@@ -52,6 +52,10 @@
         <AtomsHeadline :size="4"> Settings </AtomsHeadline>
         <AtomsContainer>
           <div class="flex justify-between items-center gap-6">
+            <AtomsLabel> Dark mode </AtomsLabel>
+            <AtomsToggle :toggled="false" @toggle="" />
+          </div>
+          <div class="flex justify-between items-center gap-6">
             <AtomsLabel> Allow apps to access your data </AtomsLabel>
             <AtomsToggle :toggled="false" @toggle="" />
           </div>
@@ -96,7 +100,7 @@ const handleLogout = async () => {
 };
 
 const saveBaseInformation = async () => {
-  if (!baseDisplayName.value) return;
+  if (!baseDisplayName.value || !hasChanges.value) return;
   isSaving.value = true;
 
   await patchUser(baseDisplayName.value);

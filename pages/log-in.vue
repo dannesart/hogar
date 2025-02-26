@@ -2,7 +2,6 @@
   <div class="p-10 flex flex-col justify-between h-svh bg-rose-50 relative">
     <div class="flex justify-between">
       <AtomsHeadline :size="3"> Hogar </AtomsHeadline>
-      <AtomsToggle :toggled="darkMode" @toggle="darkMode = $event" />
     </div>
 
     <div

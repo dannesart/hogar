@@ -1,10 +1,21 @@
 <template>
   <section class="flex flex-col gap-6">
-    <AtomsHeadline :size="4"> {{ id || title }} </AtomsHeadline>
-
     <template v-if="id">
-      <template v-for="todo in todoState.todos">
-        <MoleculesCard :title="todo.label" :icon="icon">
+      <div class="flex justify-between">
+        <AtomsHeadline :size="4"> {{ id }} </AtomsHeadline>
+        <AtomsToggle
+          :toggled="showCompleted"
+          @toggle="showCompleted = !showCompleted"
+          :size="'small'"
+        />
+      </div>
+      <template v-for="(todo, index) in todoState.todos">
+        <MoleculesCard
+          :title="todo.label"
+          :icon="'index'"
+          :index="index"
+          v-if="(showCompleted && todo.completed) || !todo.completed"
+        >
           <template v-slot:corner>
             <AtomsToggle
               :toggled="todo.completed"
@@ -14,7 +25,7 @@
           </template>
         </MoleculesCard>
       </template>
-      <AtomsEmpty v-if="!todoState.todos.length">
+      <AtomsEmpty v-if="!todoState.todos?.length">
         <AtomsHeadline :size="5"> No todo's yet. </AtomsHeadline>
       </AtomsEmpty>
       <AtomsLabel> {{ amountOfCompleted }} completed todos </AtomsLabel>
@@ -41,6 +52,8 @@
       </AtomsModal>
     </template>
     <template v-else>
+      <AtomsHeadline :size="4"> {{ title }} </AtomsHeadline>
+
       <template v-for="(value, key) in appState">
         <MoleculesCard
           :title="key as string"
@@ -124,14 +137,15 @@ const { setState } = appsStore;
 const { stateByApp, stateById } = storeToRefs(appsStore);
 const appState = computed(() => stateByApp.value(appId));
 const todoState = computed(() => stateById.value(appId, id as string));
-const amountOfLists = computed(() => Object.keys(appState.value).length);
+const amountOfLists = computed(() => Object.keys(appState.value)?.length);
 const amountOfCompleted = computed(
-  () => todoState.value.todos.filter((todo: Todo) => todo.completed).length
+  () => todoState.value.todos.filter((todo: Todo) => todo.completed)?.length
 );
 
 const valueRef = ref();
 const showCreateTodoList = ref(false);
 const showCreateTodo = ref(false);
+const showCompleted = ref(true);
 const handleUpdate = (value: string) => (valueRef.value = value);
 const saveTodoList = () => {
   setState(appId, valueRef.value, {

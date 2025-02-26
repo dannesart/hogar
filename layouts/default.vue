@@ -5,11 +5,13 @@
         class="rounded-full flex justify-center items-center cursor-pointer"
         v-wave
         v-if="isChild"
-        @click.prevent="$router.back()"
+        @click.prevent="parentRoute"
       >
         <Icon name="lucide:arrow-left" :size="30" />
       </button>
-      <div class="flex-1 overflow-hidden text-ellipsis">
+      <div
+        class="flex-1 overflow-hidden text-ellipsis flex justify-between items-center"
+      >
         <slot name="header" />
       </div>
     </header>
@@ -39,6 +41,10 @@
 const isChild = computed(() => {
   return useRoute().path.split("/").length > 2;
 });
+const parentRoute = () => {
+  const path = useRoute().path.split("/").slice(0, -1).join("/");
+  useRouter().push(path);
+};
 
 const iconBase = "lucide:";
 const navs = [

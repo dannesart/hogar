@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { App } from "~/types/App";
+type ShortCut = { label: string; route: string };
 
 type State = {
   _apps: App[];
@@ -8,8 +9,8 @@ type State = {
       [stateId: string]: any;
     };
   };
-  _favourites: App[];
-  _shortCuts: { label: string; route: string; id: string }[];
+  _favourites: { [favouriteId: string]: App };
+  _shortCuts: { [ShortCutId: string]: ShortCut };
 };
 
 export const useAppsStore = defineStore("AppsStore", {
@@ -41,6 +42,8 @@ export const useAppsStore = defineStore("AppsStore", {
         },
       ],
       _appState: {},
+      _favourites: {},
+      _shortCuts: {},
     },
   getters: {
     apps: (state) => state._apps,
@@ -65,6 +68,11 @@ export const useAppsStore = defineStore("AppsStore", {
     shortCuts: (state) => {
       return state._shortCuts;
     },
+    shortCutByRoute: (state) => {
+      return (route: string) => {
+        return state._shortCuts[route];
+      };
+    },
   },
   actions: {
     setState(appId: string, stateId: string, patchState: any) {
@@ -82,21 +90,16 @@ export const useAppsStore = defineStore("AppsStore", {
 
     setFavourite(appId: string) {
       const app = this.appById(appId);
-      if (app) this._favourites.push(app);
+      if (app) this._favourites[appId] = app;
     },
     removeFavourite(appId: string) {
-      const idx = this._favourites.findIndex(
-        (favourite) => favourite.id === appId
-      );
-      if (idx > -1) this._favourites.slice(idx, 1);
+      delete this._favourites[appId];
     },
     setShortCut(label: string, route: string) {
-      const id = crypto.randomUUID();
-      this._shortCuts.push({ label, route, id });
+      this._shortCuts[route] = { label, route };
     },
-    removeShortCut(id: string) {
-      const idx = this._shortCuts.findIndex((shortCut) => shortCut.id === id);
-      if (idx > -1) this._shortCuts.slice(idx, 1);
+    removeShortCut(route: string) {
+      delete this._shortCuts[route];
     },
 
     async getStatesByApp(appId: string) {},

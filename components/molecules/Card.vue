@@ -11,14 +11,20 @@
       v-if="icon"
       class="w-16 h-16 flex-none rounded-full bg-rose-50 flex justify-center items-center"
     >
-      <Icon :name="icon" :size="30" />
+      <div
+        v-if="icon === 'index'"
+        class="font-extrabold text-blue-950 text-2xl"
+      >
+        {{ index + 1 }}
+      </div>
+      <Icon :name="icon" :size="30" v-else />
     </div>
     <NuxtLink :to="link" v-if="title" class="overflow-hidden text-ellipsis">
       <AtomsHeadline :size="4">
         {{ title }}
       </AtomsHeadline>
     </NuxtLink>
-    <div>
+    <div v-if="$slots.corner || editable">
       <MoleculesAction
         :variant="'more'"
         :style="'transparent'"
@@ -49,6 +55,7 @@ type Props = {
   actions?: Action[];
   link?: string;
   variant?: "horizontal" | "vertical";
+  index?: number;
 };
 const {
   title,
@@ -57,6 +64,7 @@ const {
   actions = [],
   link,
   variant = "horizontal",
+  index = 0,
 } = defineProps<Props>();
 
 const emits = defineEmits(["edit", "action"]);
